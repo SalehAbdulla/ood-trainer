@@ -112,7 +112,7 @@ it uses it, otherwise it runs entirely in the page.
 ## Contents
 
 ```
-index.html            the app (open this, or let GitHub Pages serve it)
+index.html            the app (served by GitHub Pages)
 style.css             dark theme
 app.js                UI: quiz, pager, archive, dashboard
 srs.js                the scheduling engine, in the browser
@@ -122,6 +122,13 @@ srs.py                the CLI (same engine, same state format)
 server.py             optional local server for the browser UI
 practical/            four UML drill sheets with self-mark checklists
 PLAN.md               a suggested revision schedule
+```
+
+To run the site locally rather than from the hosted URL, serve the folder over
+HTTP — the app fetches `bank/*.json`, which browsers block on `file://`:
+
+```bash
+python3 -m http.server 8000     # then open http://127.0.0.1:8000
 ```
 
 ## Notes and limits

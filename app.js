@@ -29,7 +29,8 @@ async function probe() {
   if (MODE.probed) return;
   MODE.probed = true;
   try {
-    const res = await fetch('/api/status', { cache: 'no-store' });
+    // relative, so a project site under /<repo>/ stays inside the project
+    const res = await fetch('api/status', { cache: 'no-store' });
     MODE.static = !res.ok;
   } catch (e) {
     MODE.static = true;
