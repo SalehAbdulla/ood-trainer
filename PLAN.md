@@ -17,11 +17,10 @@ Every question is a card with a **streak** counter and a **review stage**.
 | **Correct** (streak 1) | Archived → back in **5 minutes** (Review 1) |
 | **Correct** (streak 2) | Archived → back in **15 minutes** (Review 2) |
 | **Correct** (streak 3) | Archived → back in **1 hour** (Review 3) |
-| **Correct** (streak 4) | Archived → back in **1 day** (Review 4) |
-| **Correct** (streak 5) | **MASTERED** — retired to the archive for good |
+| **Correct** (streak 4) | **MASTERED** — retired to the archive for good |
 | **Wrong** | Straight back to the start of the ladder → due again in **5 minutes** |
 
-So a question only retires after **5 correct answers across four widening gaps**.
+So a question only retires after **4 correct answers across three widening gaps**.
 That is what makes it stick — and it is all in one day, which is why the ladder
 starts in minutes rather than days.
 
@@ -36,10 +35,10 @@ marathon:
 2. **Wait 5 minutes.** The web UI counts down on screen and pulls the question
    in automatically; the CLI tells you `next review at 14:47`.
 3. **Review 1** — the ones that came back. Correct → 15 minutes. Wrong → 5 again.
-4. **Review 2 → 1 hour. Review 3 → 1 day. Review 4 → mastered.**
+4. **Review 2 → 1 hour. Review 3 → mastered.**
 
-So a full cycle for one question is roughly: answer → +5 min → +15 min → +1 hr
-→ +1 day → retired. Do the passes, and the app tells you when to come back.
+So a full cycle for one question is roughly: answer → +5 min → +15 min → +1 hr →
+retired. Do the passes, and the app tells you when to come back.
 
 Browse the archive any time to see every question you have answered and exactly
 when each one returns:

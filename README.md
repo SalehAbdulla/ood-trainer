@@ -15,15 +15,14 @@ and never leaves your device.
 
 It is a spaced-repetition trainer, not a quiz. Every question you answer comes
 back on a widening schedule, and a question is only retired once you have
-recalled it correctly five times across four gaps:
+recalled it correctly four times across three gaps:
 
 | Correct answer | Review | Comes back after |
 |---|---|---|
 | 1st | Review 1 | **+5 minutes** |
 | 2nd | Review 2 | **+15 minutes** |
 | 3rd | Review 3 | **+1 hour** |
-| 4th | Review 4 | **+1 day** |
-| 5th | — | **mastered** — retired |
+| 4th | — | **mastered** — retired |
 | *any wrong answer* | back to the start | **+5 minutes** |
 
 A mistake puts the question straight back on the first rung, so the things you
@@ -38,7 +37,7 @@ always agree. (Waiting and Mastered are the parts of it; neither is the total.)
 mastered, blue is answered and still in rotation, and the grey remainder is
 untouched — with `8 of 130 answered · 0 mastered` and a percentage alongside.
 
-It is deliberately **not** a mastery bar. Mastery needs five correct recalls per
+It is deliberately **not** a mastery bar. Mastery needs four correct recalls per
 question, so a mastery-only bar would sit at 0% while you answered question
 after question. This one moves the moment you answer anything, and turns green
 at 100% once you have seen every question.

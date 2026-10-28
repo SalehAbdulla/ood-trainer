@@ -14,9 +14,10 @@ const SRS = (() => {
   /* ---- constants (kept in step with srs.py) ---------------------------- */
   const EXAM_DATE = '2026-11-01';
   const WEEKS = [1, 2, 3, 4, 5];
-  const DEFAULT_INTERVALS = [5, 15, 60, 1440];
-  const DEFAULT_MASTERY_STREAK = 5;
-  const STATE_VERSION = 3;
+  const DEFAULT_INTERVALS = [5, 15, 60];
+  const DEFAULT_MASTERY_STREAK = 4;   // len(intervals) + 1
+  const STATE_VERSION = 4;            // v3 added last_choice / last_correct;
+                                      // v4 shortened the ladder to three rungs
   const STORAGE_KEY = 'it7006-ood-progress';
   const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -146,7 +147,11 @@ const SRS = (() => {
         + `understands v${STATE_VERSION}. Refusing to load it rather than `
         + `silently downgrade your progress.`);
     }
-    if (fileVersion < 2 || st.intervals_days) {
+    // v4 shortened the ladder from four rungs to three, so mastery takes 4
+    // corrects not 5. The ladder lives in the saved state, so the upgrade has to
+    // rewrite it - changing only the defaults here would leave an existing
+    // browser (or progress.json) still on the old ladder.
+    if (fileVersion < 4 || st.intervals_days) {
       st.intervals_minutes = DEFAULT_INTERVALS.slice();
       st.mastery_streak = DEFAULT_MASTERY_STREAK;
     } else {

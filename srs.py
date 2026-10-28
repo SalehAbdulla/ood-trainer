@@ -10,13 +10,16 @@ you solved it"):
                      1st correct -> Review 1 -> +5 minutes
                      2nd correct -> Review 2 -> +15 minutes
                      3rd correct -> Review 3 -> +1 hour
-                     4th correct -> Review 4 -> +1 day
-                     5th correct -> MASTERED (retired to the archive)
+                     4th correct -> MASTERED (retired to the archive)
     WRONG    ->  a mistake sends the question back to the start of the ladder,
                  so it is due again in 5 minutes, and a lapse is recorded.
 
 A question with streak >= mastery_streak is MASTERED. Mastered questions never
 return to the queue; they live in the archive and can be browsed any time.
+
+The ladder and the threshold are a pair: `intervals_minutes` holds the gaps and
+`mastery_streak` is len(intervals) + 1, so that every gap gets used before a
+question retires. Change one without the other and the last rung goes unused.
 
 Because the first rungs are minutes, `due` is a full date+time, not a date.
 
@@ -51,10 +54,11 @@ ARCHIVE_DIR = os.path.join(ROOT, "archive")
 
 EXAM_DATE = date(2026, 11, 1)
 
-# minutes between reviews, indexed by the streak (1st correct, 2nd, 3rd, 4th)
-DEFAULT_INTERVALS = [5, 15, 60, 1440]
-DEFAULT_MASTERY_STREAK = 5          # len(intervals) + 1
-STATE_VERSION = 3          # v3 adds last_choice / last_correct per item
+# minutes between reviews, indexed by the streak (1st correct, 2nd, 3rd)
+DEFAULT_INTERVALS = [5, 15, 60]
+DEFAULT_MASTERY_STREAK = 4          # len(intervals) + 1
+STATE_VERSION = 4          # v3 added last_choice / last_correct; v4 shortens the
+                           # ladder to three rungs (mastery after 4 corrects)
 WEEKS = [1, 2, 3, 4, 5]
 
 
@@ -131,14 +135,18 @@ def load_state() -> dict:
             f"{STATE_VERSION}. You are running an old copy of srs.py or a stale web "
             f"server - stop it and restart before answering anything.")
 
-    # v1 used day-based intervals and date-only `due`; v2 uses minutes and
-    # full datetimes; v3 records the option the user last picked. Legacy
-    # date-only dues parse as midnight, so they simply read as overdue.
+    # v1 used day-based intervals and date-only `due`; v2 moved to minutes and
+    # full datetimes; v3 added last_choice / last_correct; v4 shortened the
+    # ladder from four rungs to three, so mastery takes 4 corrects not 5.
+    #
+    # The ladder lives in the state file, so an upgrade has to rewrite it - just
+    # changing the defaults in this file would leave an existing progress.json
+    # still on the old ladder.
     migrated = file_version < STATE_VERSION or "intervals_days" in state
     if file_version < STATE_VERSION or "intervals_days" in state:
         state.pop("intervals_days", None)
         state["version"] = STATE_VERSION
-    if file_version < 2 or "intervals_days" in state:
+    if file_version < 4 or "intervals_days" in state:
         state["intervals_minutes"] = list(DEFAULT_INTERVALS)
         state["mastery_streak"] = DEFAULT_MASTERY_STREAK
     else:
@@ -320,9 +328,6 @@ def days_to_exam(today: date | None = None) -> int:
 # presentation
 # --------------------------------------------------------------------------- #
 BAR = "-" * 72
-
-# the four rungs of the ladder, for display
-LADDER_LABELS = ["5 min", "15 min", "1 hour", "1 day"]
 
 
 def humanize_minutes(mins) -> str:
