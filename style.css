@@ -77,8 +77,25 @@ code, pre, kbd, .qid { font-family: var(--mono); }
 .stat .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .09em; color: var(--fg-faint); }
 .stat .v { font-family: var(--mono); font-size: 17px; font-weight: 600; }
 
-.progress-track { height: 3px; background: var(--bg-3); }
-.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .35s ease; }
+/* ------------------------------------------------------------ coverage bar */
+.progress-wrap { padding: 10px 0 0; }
+.progress-track {
+  display: flex; height: 9px; background: var(--bg-3);
+  border: 1px solid var(--line-soft); border-radius: 999px; overflow: hidden;
+}
+.progress-fill { height: 100%; width: 0; transition: width .35s ease; }
+.progress-fill.p-mastered { background: var(--ok); }
+.progress-fill.p-answered { background: var(--accent); }
+.progress-legend {
+  display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+  margin-top: 7px; font-size: 12px; color: var(--fg-dim);
+}
+.progress-legend b { color: var(--fg); font-weight: 600; }
+.progress-legend .sep { color: var(--fg-faint); }
+.progress-pct {
+  font-family: var(--mono); font-size: 13.5px; font-weight: 700; color: var(--accent);
+}
+.progress-pct.done { color: var(--ok); }
 
 /* ------------------------------------------------------------------ main */
 main { max-width: 940px; margin: 0 auto; padding: 22px 20px 60px; }

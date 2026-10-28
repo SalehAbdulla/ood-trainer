@@ -34,6 +34,15 @@ Untouched · Session · Accuracy*. **Archived** is how many questions you have
 answered at least once — the same set the Archive tab lists, so the two numbers
 always agree. (Waiting and Mastered are the parts of it; neither is the total.)
 
+**A coverage bar sits under it**, showing the whole bank at a glance: green is
+mastered, blue is answered and still in rotation, and the grey remainder is
+untouched — with `8 of 130 answered · 0 mastered` and a percentage alongside.
+
+It is deliberately **not** a mastery bar. Mastery needs five correct recalls per
+question, so a mastery-only bar would sit at 0% while you answered question
+after question. This one moves the moment you answer anything, and turns green
+at 100% once you have seen every question.
+
 ### The quiz
 
 - **Auto-advance.** Answer, the verdict holds for 2.5 s with a `next in 2.4s`

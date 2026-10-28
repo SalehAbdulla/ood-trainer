@@ -6,7 +6,7 @@
 <title>IT7006 OOD · Midterm Trainer</title>
 <!-- bump ?v= whenever style.css / srs.js / app.js change, so a browser cannot
      serve a stale mix of old and new files (GitHub Pages caches each for 10 min) -->
-<link rel="stylesheet" href="style.css?v=20261028a">
+<link rel="stylesheet" href="style.css?v=20261028b">
 </head>
 <body>
 
@@ -34,7 +34,19 @@
   <div class="stat"><span class="k">Accuracy</span><span class="v" id="s-acc">—</span></div>
 </div>
 
-<div class="progress-track"><div class="progress-fill" id="p-fill"></div></div>
+<div class="progress-wrap">
+  <div class="progress-track" title="green = mastered · blue = answered, still in rotation · grey = untouched">
+    <div class="progress-fill p-mastered" id="p-mastered"></div>
+    <div class="progress-fill p-answered" id="p-answered"></div>
+  </div>
+  <div class="progress-legend">
+    <span><b id="p-answered-n">0</b> of <b id="p-total">130</b> answered</span>
+    <span class="sep">·</span>
+    <span><b id="p-mastered-n">0</b> mastered</span>
+    <span class="spacer"></span>
+    <span class="progress-pct" id="p-pct">0%</span>
+  </div>
+</div>
 
 <main>
 
@@ -268,7 +280,7 @@
   <span>a wrong answer sends the question back to 5 min</span>
 </footer>
 
-<script src="srs.js?v=20261028a"></script>
-<script src="app.js?v=20261028a"></script>
+<script src="srs.js?v=20261028b"></script>
+<script src="app.js?v=20261028b"></script>
 </body>
 </html>

@@ -88,7 +88,17 @@ async function refreshStatus() {
   $('s-mastered').textContent = `${st.mastered} / ${st.total}`;
   $('s-archived').textContent = st.archived;
   $('s-untouched').textContent = st.untouched;
-  $('p-fill').style.width = fmtPct(st.mastered, st.total) + '%';
+  // Coverage bar: green = mastered, blue = answered and still in rotation, the
+  // grey track = untouched. Unlike the mastery figure this moves the moment you
+  // answer anything, which is the point of it.
+  const share = (n) => `${fmtPct(n, st.total)}%`;
+  $('p-mastered').style.width = share(st.mastered);
+  $('p-answered').style.width = share(st.archived - st.mastered);
+  $('p-answered-n').textContent = st.archived;
+  $('p-total').textContent = st.total;
+  $('p-mastered-n').textContent = st.mastered;
+  $('p-pct').textContent = share(st.archived);
+  $('p-pct').classList.toggle('done', st.total > 0 && st.archived >= st.total);
   return st;
 }
 
