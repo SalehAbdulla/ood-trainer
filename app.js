@@ -16,6 +16,15 @@ const S = {
 // After answering, hold the verdict for this long, then fade to the next question.
 const AUTO_ADVANCE_MS = 2500;
 
+// How long the card takes to fade out before the next question swaps in. This
+// also drives the CSS transition (via --fade-ms), so the two cannot drift apart.
+const FADE_MS = 120;
+try {
+  if (document.documentElement) {
+    document.documentElement.style.setProperty('--fade-ms', FADE_MS + 'ms');
+  }
+} catch (e) { /* a stubbed DOM in the tests has no documentElement */ }
+
 /* ------------------------------------------------------------------ api */
 // Two backends, one UI:
 //   * server mode - the optional local server.py; progress in progress.json
@@ -341,7 +350,8 @@ async function fadeTo(fn) {
   const card = $('card');
   if (!prefersReducedMotion()) {
     card.classList.add('fading');
-    await new Promise((res) => setTimeout(res, 270));
+    // wait just past the CSS transition, so the card is fully faded before the swap
+    await new Promise((res) => setTimeout(res, FADE_MS + 20));
   }
   await fn();
   card.classList.remove('fading');

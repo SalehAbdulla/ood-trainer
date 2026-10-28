@@ -17,6 +17,7 @@
   --bad-bg:    #2d1214;
   --warn:      #d29922;
   --radius:    10px;
+  --fade-ms:   120ms;   /* overridden from FADE_MS in app.js */
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -295,7 +296,7 @@ kbd {
 }
 
 /* ------------------------------------------------- fade between questions */
-.card { transition: opacity .26s ease, transform .26s ease; }
+.card { transition: opacity var(--fade-ms, 120ms) ease, transform var(--fade-ms, 120ms) ease; }
 .card.fading { opacity: 0; transform: translateY(-8px); }
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; }
