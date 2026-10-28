@@ -330,6 +330,9 @@ const SRS = (() => {
       untouched: items.filter((i) => i.correct === 0 && i.wrong === 0).length,
       mastered: items.filter((i) => i.mastered).length,
       waiting: items.filter((i) => !i.mastered && !isDue(i, nowDt)).length,
+      // everything you have answered at least once - the same set the archive
+      // page lists, so this always matches its "All" tab
+      archived: items.filter((i) => (i.correct || 0) + (i.wrong || 0) > 0).length,
       due: select(st, bk).length,
       mastery_streak: st.mastery_streak,
       stages: st.intervals_minutes.length,

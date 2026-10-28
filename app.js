@@ -86,6 +86,7 @@ async function refreshStatus() {
   $('s-due').textContent = st.due;
   $('s-waiting').textContent = st.waiting;
   $('s-mastered').textContent = `${st.mastered} / ${st.total}`;
+  $('s-archived').textContent = st.archived;
   $('s-untouched').textContent = st.untouched;
   $('p-fill').style.width = fmtPct(st.mastered, st.total) + '%';
   return st;

@@ -97,6 +97,10 @@ def status_payload() -> dict:
                          if i["correct"] == 0 and i["wrong"] == 0),
         "mastered": mastered,
         "waiting": waiting,
+        # everything you have answered at least once - the same set the archive
+        # page lists, so this always matches its "All" tab
+        "archived": sum(1 for i in state["items"].values()
+                        if i["correct"] + i["wrong"] > 0),
         "due": len(rows),
         "mastery_streak": state["mastery_streak"],
         "stages": len(state["intervals_minutes"]),

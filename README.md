@@ -29,6 +29,11 @@ recalled it correctly five times across four gaps:
 A mistake puts the question straight back on the first rung, so the things you
 are worst at come back most often.
 
+**A stat bar sits above every view:** *Due now · Waiting · Mastered · Archived ·
+Untouched · Session · Accuracy*. **Archived** is how many questions you have
+answered at least once — the same set the Archive tab lists, so the two numbers
+always agree. (Waiting and Mastered are the parts of it; neither is the total.)
+
 ### The quiz
 
 - **Auto-advance.** Answer, the verdict holds for 2.5 s with a `next in 2.4s`
