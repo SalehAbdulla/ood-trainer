@@ -171,6 +171,104 @@ def answer_payload(qid: str, correct: bool, summary: dict, state: dict, bank: di
 
 
 
+def exam_paper_payload(bank: dict, n: int) -> dict:
+    """A fixed paper drawn from the whole bank, weighted by each week's marks.
+
+    Deliberately does NOT touch progress: an exam is a test, not study, and
+    recording it would distort the spaced-repetition intervals.
+    """
+    by_week: dict = {}
+    marks_of: dict = {}
+    for qid, q in bank.items():
+        w = q["week"]
+        by_week.setdefault(w, []).append(qid)
+        marks_of[w] = marks_of.get(w, 0) + q.get("marks", 1)
+    grand = sum(marks_of.values()) or 1
+    weeks = sorted(by_week)
+
+    # largest-remainder apportionment, capped at each week's pool, then the
+    # remainder handed out round-robin so the counts always total exactly n
+    quotas = [{"week": w, "exact": (marks_of[w] / grand) * n, "take": 0} for w in weeks]
+    for q in quotas:
+        q["take"] = min(int(q["exact"]), len(by_week[q["week"]]))
+    quotas.sort(key=lambda q: q["exact"] % 1, reverse=True)
+    used = sum(q["take"] for q in quotas)
+    progressed = True
+    while used < n and progressed:
+        progressed = False
+        for q in quotas:
+            if used >= n:
+                break
+            if q["take"] < len(by_week[q["week"]]):
+                q["take"] += 1
+                used += 1
+                progressed = True
+
+    picked: list = []
+    for q in quotas:
+        pool = list(by_week[q["week"]])
+        random.shuffle(pool)
+        picked.extend(pool[: q["take"]])
+    random.shuffle(picked)
+
+    questions = []
+    for qid in picked:
+        q = bank[qid]
+        mcq = q.get("mcq")
+        opts = list(mcq["options"]) if mcq else None
+        if opts:
+            random.shuffle(opts)          # correct text is NOT identified
+        questions.append({
+            "id": qid, "week": q["week"], "topic": q.get("topic", ""),
+            "marks": q.get("marks", 1),
+            "stem": (mcq or {}).get("stem") or q["q"],
+            "options": opts,
+            "mode": "mcq" if mcq else "open",
+        })
+    return {
+        "count": len(questions),
+        "total_marks": sum(q["marks"] for q in questions),
+        "breakdown": sorted(({"week": q["week"], "count": q["take"]} for q in quotas),
+                            key=lambda r: r["week"]),
+        "questions": questions,
+    }
+
+
+def exam_mark_payload(bank: dict, body: dict) -> dict:
+    """Mark a whole paper in one go, so nothing is revealed while the clock runs."""
+    results = []
+    score = total = 0
+    for a in body.get("answers", []):
+        q = bank.get(a.get("id"))
+        if not q:
+            continue
+        mcq = q.get("mcq")
+        marks = q.get("marks", 1)
+        total += marks
+        answered = a.get("choice") is not None
+        # an unanswered question is not the same as a wrong one, so leave it None
+        correct = ((a.get("choice") == mcq["options"][mcq["answer"]])
+                   if (mcq and answered) else None)
+        if correct:
+            score += marks
+        results.append({
+            "id": q["id"], "week": q["week"], "topic": q.get("topic", ""),
+            "marks": marks,
+            "stem": (mcq or {}).get("stem") or q["q"],
+            "question": q["q"],
+            "your_choice": a.get("choice") if (mcq and answered) else None,
+            "correct_option": mcq["options"][mcq["answer"]] if mcq else None,
+            "correct": correct, "answered": answered,
+            "model_answer": q["a"], "tip": q.get("tip"),
+        })
+    return {
+        "score": score, "total": total,
+        "percent": round(score / total * 100) if total else 0,
+        "answered": sum(1 for r in results if r["answered"]),
+        "count": len(results), "results": results,
+    }
+
+
 # --------------------------------------------------------------------------- #
 # request handler
 # --------------------------------------------------------------------------- #
@@ -310,6 +408,11 @@ class Handler(BaseHTTPRequestHandler):
                     for qid, it in rows[:n]
                 ])
 
+        if path == "/api/exam/paper":
+            n = _int(qs.get("n", ["20"])[0], 20, 5, 130)
+            with LOCK:
+                return self._json(exam_paper_payload(srs.load_bank(), n))
+
         return self._serve_static(path)
 
     def do_HEAD(self) -> None:
@@ -361,6 +464,12 @@ class Handler(BaseHTTPRequestHandler):
             with LOCK:
                 srs.save_state(srs.blank_state())
                 return self._json({"ok": True})
+
+        if path == "/api/exam/mark":
+            # NB: do_POST already read the body at the top of this method - calling
+            # _body() again would block forever on a body that is already consumed.
+            with LOCK:
+                return self._json(exam_mark_payload(srs.load_bank(), body))
 
         return self._error(404, "unknown endpoint")
 

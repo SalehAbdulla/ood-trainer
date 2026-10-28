@@ -16,6 +16,7 @@
   <nav class="topbar-right">
     <div class="chip" id="countdown" title="days until the midterm">—</div>
     <button class="btn ghost nav-btn" id="btn-quiz" data-route="quiz" type="button">Quiz</button>
+    <button class="btn ghost nav-btn" id="btn-exam" data-route="exam" type="button">Exam</button>
     <button class="btn ghost nav-btn" id="btn-dash" data-route="dashboard" type="button">Dashboard</button>
     <button class="btn ghost nav-btn" id="btn-arch" data-route="archive" type="button">Archive</button>
   </nav>
@@ -115,6 +116,91 @@
     </div>
   </section>
 
+  <!-- ============================= EXAM VIEW =========================== -->
+  <section id="view-exam" hidden>
+
+    <!-- setup -->
+    <div id="exam-setup">
+      <h2 class="section-title">Timed exam</h2>
+      <p class="muted">
+        A fixed paper drawn from the whole bank and weighted by each week's share of the
+        marks. Nothing is revealed while the clock runs — no verdict, no model answer.
+        <b>Your revision schedule is not affected</b>: an exam is a test, not study, so
+        nothing here is recorded against your reviews.
+      </p>
+      <div class="toolbar">
+        <label class="field">Questions
+          <select id="exam-size">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="60">60</option>
+            <option value="130">all 130</option>
+          </select>
+        </label>
+        <label class="field">Minutes
+          <select id="exam-mins">
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+            <option value="60" selected>60</option>
+            <option value="120">120</option>
+          </select>
+        </label>
+        <span class="spacer"></span>
+        <button class="btn primary" id="btn-exam-start" type="button">Start exam</button>
+      </div>
+      <div id="exam-last"></div>
+    </div>
+
+    <!-- running -->
+    <div id="exam-run" hidden>
+      <div class="exam-bar">
+        <span class="exam-clock" id="exam-clock">--:--</span>
+        <span class="muted" id="exam-progress">—</span>
+        <span class="spacer"></span>
+        <button class="btn ghost" id="btn-exam-abandon" type="button">Abandon</button>
+        <button class="btn primary" id="btn-exam-submit" type="button">Submit paper</button>
+      </div>
+
+      <article class="card">
+        <div class="card-head">
+          <div class="tags">
+            <span class="tag wk" id="exam-week">—</span>
+            <span class="tag" id="exam-topic">—</span>
+            <span class="tag marks" id="exam-marks">—</span>
+          </div>
+          <div class="qid" id="exam-pos">—</div>
+        </div>
+        <h2 class="stem" id="exam-stem">—</h2>
+        <div class="options" id="exam-options"></div>
+      </article>
+
+      <div class="pager">
+        <button class="btn ghost" id="btn-exam-prev" type="button">← Prev</button>
+        <span class="page-info" id="exam-page">—</span>
+        <button class="btn ghost" id="btn-exam-next" type="button">Next →</button>
+      </div>
+    </div>
+
+    <!-- results -->
+    <div id="exam-result" hidden>
+      <div class="exam-score">
+        <div class="exam-pct" id="exam-pct">—</div>
+        <div class="exam-score-text">
+          <div id="exam-summary">—</div>
+          <div class="muted" id="exam-breakdown">—</div>
+        </div>
+        <span class="spacer"></span>
+        <button class="btn" id="btn-exam-again" type="button">New paper</button>
+      </div>
+      <h2 class="section-title">Review — every question, your answer and the model answer</h2>
+      <div class="arch-list" id="exam-review"></div>
+    </div>
+
+  </section>
+
   <!-- ============================ ARCHIVE VIEW ========================= -->
   <section id="view-archive" hidden>
     <h2 class="section-title">Archive</h2>
@@ -176,7 +262,7 @@
 
 <footer class="foot">
   <span>spaced repetition · 5 min → 15 min → 1 h → 1 d → mastered (5 corrects)</span>
-  <span id="foot-source">a wrong answer sends the question back to 5 min</span>
+  <span>a wrong answer sends the question back to 5 min</span>
 </footer>
 
 <script src="srs.js"></script>

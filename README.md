@@ -56,6 +56,26 @@ Rows that have come due are flagged `DUE NOW`, and a banner offers
 so a question that expires while you are reading is waiting for you on the Quiz
 tab.
 
+### The exam
+
+A timed paper, for rehearsing under pressure. Open the **Exam** tab:
+
+- **Choose a size and a clock** — 10 to 130 questions, 15 to 120 minutes.
+- **The paper is weighted by marks**, not by question count: each week contributes
+  questions in proportion to its share of the bank's 622 marks, so the paper looks like
+  the real thing rather than like your due queue.
+- **Nothing is revealed while the clock runs.** No verdict, no model answer, no
+  colour — you can change an answer as often as you like until you submit.
+- **Submit when you are ready**, or the paper submits itself when the clock hits zero.
+  Unanswered questions are marked but flagged as *not answered* rather than wrong.
+- **The result** gives your score and percentage, a per-week breakdown, and a review of
+  every question with your answer, the correct answer and the model answer — green
+  border if you got it, red if you did not, grey if you skipped it.
+- **Your revision schedule is untouched.** An exam is a test, not study, so nothing is
+  recorded against your spaced-repetition intervals.
+
+`1`–`4` answer, `←`/`→` move between questions.
+
 ### The dashboard
 
 Per-week progress bars, your 12 weakest questions, an archived summary, and

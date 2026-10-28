@@ -562,6 +562,8 @@ const SRS = (() => {
         sync(state, bk);
         saveState();
         return { ok: true };
+      case '/api/exam/paper': return examPaper(bk, qs);
+      case '/api/exam/mark': return examMark(bk, body || {});
       case '/api/archive/write':
         return {
           ok: true,
@@ -598,6 +600,99 @@ const SRS = (() => {
     state = null;
   }
 
+  /* ---- exam mode ------------------------------------------------------- */
+  // A fixed paper drawn from the whole bank and weighted by each week's share
+  // of the marks, so it looks like the real paper rather than like the due
+  // queue. Answering it does NOT touch the spaced-repetition schedule: an exam
+  // is a test, not study, and recording it would distort your intervals.
+  function examPaper(bk, qs) {
+    const n = clampInt(qs.get('n'), 20, 5, 130);
+    const byWeek = {};
+    const marksOf = {};
+    for (const qid of Object.keys(bk)) {
+      const w = bk[qid].week;
+      (byWeek[w] = byWeek[w] || []).push(qid);
+      marksOf[w] = (marksOf[w] || 0) + (bk[qid].marks || 1);
+    }
+    const grand = Object.values(marksOf).reduce((a, b) => a + b, 0) || 1;
+    const weeks = Object.keys(byWeek).map(Number).sort((a, b) => a - b);
+
+    // largest-remainder apportionment, capped at each week's pool, then the
+    // remainder handed out round-robin so the counts always total exactly n
+    const quotas = weeks.map((w) => ({ w, exact: (marksOf[w] / grand) * n, take: 0 }));
+    for (const q of quotas) {
+      q.take = Math.min(Math.floor(q.exact), byWeek[q.w].length);
+    }
+    quotas.sort((a, b) => (b.exact % 1) - (a.exact % 1));
+    let used = quotas.reduce((a, q) => a + q.take, 0);
+    let progressed = true;
+    while (used < n && progressed) {
+      progressed = false;
+      for (const q of quotas) {
+        if (used >= n) break;
+        if (q.take < byWeek[q.w].length) { q.take += 1; used += 1; progressed = true; }
+      }
+    }
+
+    const picked = [];
+    for (const q of quotas) {
+      picked.push(...shuffle(byWeek[q.w].slice()).slice(0, q.take));
+    }
+    shuffle(picked);
+
+    const questions = picked.map((qid) => {
+      const q = bk[qid], mcq = q.mcq;
+      return {
+        id: qid, week: q.week, topic: q.topic || '', marks: q.marks || 1,
+        stem: (mcq && mcq.stem) || q.q,
+        options: mcq ? shuffle(mcq.options.slice()) : null,
+        mode: mcq ? 'mcq' : 'open',
+      };
+    });
+    return {
+      count: questions.length,
+      total_marks: questions.reduce((a, q) => a + q.marks, 0),
+      breakdown: quotas.map((q) => ({ week: q.w, count: q.take }))
+        .sort((a, b) => a.week - b.week),
+      questions,
+    };
+  }
+
+  // Marks a whole paper in one go, so nothing is revealed while the clock runs.
+  function examMark(bk, body) {
+    const answers = (body && body.answers) || [];
+    const results = [];
+    let score = 0, total = 0;
+    for (const a of answers) {
+      const q = bk[a.id];
+      if (!q) continue;
+      const mcq = q.mcq;
+      const marks = q.marks || 1;
+      total += marks;
+      const answered = a.choice !== undefined && a.choice !== null;
+      // an unanswered question is not the same as a wrong one, so leave it null
+      const correct = (mcq && answered) ? a.choice === mcq.options[mcq.answer] : null;
+      if (correct) score += marks;
+      results.push({
+        id: a.id, week: q.week, topic: q.topic || '', marks,
+        stem: (mcq && mcq.stem) || q.q,
+        question: q.q,
+        your_choice: mcq && answered ? a.choice : null,
+        correct_option: mcq ? mcq.options[mcq.answer] : null,
+        correct, answered,
+        model_answer: q.a,
+        tip: q.tip || null,
+      });
+    }
+    return {
+      score, total,
+      percent: total ? Math.round((score / total) * 100) : 0,
+      answered: results.filter((r) => r.answered).length,
+      count: results.length,
+      results,
+    };
+  }
+
   return {
     // what app.js needs
     handle, ready, exportState, importState, resetLocal,
@@ -608,6 +703,7 @@ const SRS = (() => {
     humanizeMinutes, dueLabel, timeUntil, parseDue, isoLocal, daysToExam,
     archiveRows, renderArchiveMarkdown, examLabel,
     statusPayload, questionPayload, answerPayload, archivePayload, weakestPayload,
+    examPaper, examMark,
   };
 })();
 

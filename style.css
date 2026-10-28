@@ -379,3 +379,35 @@ kbd {
 }
 .card-like .toolbar { margin-top: 6px; }
 
+/* --------------------------------------------------------------- exam mode */
+.exam-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 14px; padding: 10px 14px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.exam-clock {
+  font-family: var(--mono); font-size: 20px; font-weight: 700;
+  color: var(--accent); letter-spacing: .04em; min-width: 78px;
+}
+.exam-clock.hot { color: var(--bad); }
+
+.exam-score {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  margin-bottom: 18px; padding: 16px 18px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.exam-pct {
+  font-family: var(--mono); font-size: 40px; font-weight: 700;
+  line-height: 1; min-width: 120px;
+}
+.exam-pct.good { color: var(--ok); }
+.exam-pct.warn { color: var(--warn); }
+.exam-pct.bad  { color: var(--bad); }
+.exam-score-text { font-size: 13.5px; line-height: 1.6; }
+
+#exam-setup .toolbar { margin-top: 14px; }
+#exam-last { margin-top: 12px; }
+#exam-last p { margin: 0; }
+

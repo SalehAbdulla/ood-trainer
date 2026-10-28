@@ -91,7 +91,12 @@ function refreshSession() {
 /* --------------------------------------------------------------- router */
 // Views are addressed by the URL hash, so the browser Back button works, a
 // reload keeps you where you were, and each view is linkable/bookmarkable.
-const VIEWS = { quiz: 'view-quiz', dashboard: 'view-dash', archive: 'view-archive' };
+const VIEWS = {
+  quiz: 'view-quiz',
+  exam: 'view-exam',
+  dashboard: 'view-dash',
+  archive: 'view-archive',
+};
 
 function currentRoute() {
   const h = (location.hash || '').replace(/^#\/?/, '').toLowerCase();
@@ -108,6 +113,7 @@ function applyRoute(route) {
     : `IT7006 OOD · ${route[0].toUpperCase()}${route.slice(1)}`;
   if (route === 'dashboard') renderDashboard();
   if (route === 'archive') renderArchive();
+  if (route === 'exam') examEnter();
   if (route === 'quiz') resumeQuiz();
 }
 
@@ -397,6 +403,20 @@ async function grade(body) {
 /* -------------------------------------------------------------- keyboard */
 document.addEventListener('keydown', (e) => {
   if (e.target.matches('select, input, textarea')) return;
+
+  // a running exam owns the keyboard: 1-4 answer, arrows move between questions
+  if (EXAM.running && !$('view-exam').hidden) {
+    if (KEYS.includes(e.key)) {
+      const btns = [...$('exam-options').querySelectorAll('.option')];
+      const b = btns[KEYS.indexOf(e.key)];
+      if (b) { e.preventDefault(); examPick(b.dataset.text); }
+      return;
+    }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); examMove(-1); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); examMove(1); return; }
+    return;
+  }
+
   if (!S.q) return;
 
   // any key stops the auto-advance, except Enter/Space which advance explicitly
@@ -546,6 +566,206 @@ function startArchiveRefresh() {
 }
 
 
+/* ------------------------------------------------------------------ exam */
+// A timed paper: a fixed set of questions drawn from the whole bank, with no
+// feedback until you submit. Nothing here touches the revision schedule.
+const EXAM = {
+  paper: null,        // {count, total_marks, breakdown, questions}
+  answers: {},        // question id -> the option text picked
+  idx: 0,
+  endsAt: 0,
+  timer: null,
+  running: false,
+  last: null,         // summary of the previous paper, for the setup screen
+};
+
+async function examStart() {
+  const n = Number($('exam-size').value);
+  const mins = Number($('exam-mins').value);
+  $('btn-exam-start').disabled = true;
+  try {
+    EXAM.paper = await api(`/api/exam/paper?n=${n}`);
+  } catch (e) {
+    alert('Could not build a paper: ' + e.message);
+    return;
+  } finally {
+    $('btn-exam-start').disabled = false;
+  }
+  EXAM.answers = {};
+  EXAM.idx = 0;
+  EXAM.endsAt = Date.now() + mins * 60000;
+  EXAM.running = true;
+  $('exam-setup').hidden = true;
+  $('exam-result').hidden = true;
+  $('exam-run').hidden = false;
+  examRender();
+  examTick();
+  EXAM.timer = setInterval(examTick, 1000);
+}
+
+function examTick() {
+  if (!EXAM.running) return;
+  const left = Math.max(0, EXAM.endsAt - Date.now());
+  const s = Math.ceil(left / 1000);
+  const el = $('exam-clock');
+  el.textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:`
+    + String(s % 60).padStart(2, '0');
+  el.classList.toggle('hot', s <= 60);
+  if (left <= 0) examSubmit(true);      // time is up: submit whatever we have
+}
+
+function examRender() {
+  const p = EXAM.paper;
+  if (!p) return;
+  const q = p.questions[EXAM.idx];
+  $('exam-week').textContent = `Week ${q.week}`;
+  $('exam-topic').textContent = q.topic || '—';
+  $('exam-marks').textContent = `${q.marks} mark${q.marks === 1 ? '' : 's'}`;
+  $('exam-pos').textContent = `question ${EXAM.idx + 1} of ${p.count}`;
+  $('exam-stem').textContent = q.stem;
+
+  const opts = $('exam-options');
+  opts.innerHTML = '';
+  const chosen = EXAM.answers[q.id];
+  q.options.forEach((text, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'option';
+    if (text === chosen) b.classList.add('picked');
+    b.dataset.text = text;
+    b.innerHTML = `<span class="key">${KEYS[i] || i + 1}</span><span class="txt"></span>`;
+    b.querySelector('.txt').textContent = text;
+    b.addEventListener('click', () => examPick(text));
+    opts.appendChild(b);
+  });
+
+  const done = Object.keys(EXAM.answers).length;
+  $('exam-progress').textContent = `${done} of ${p.count} answered`;
+  $('exam-page').textContent = `${EXAM.idx + 1} / ${p.count}`;
+  $('btn-exam-prev').disabled = EXAM.idx <= 0;
+  $('btn-exam-next').disabled = EXAM.idx >= p.count - 1;
+}
+
+function examPick(text) {
+  if (!EXAM.running) return;
+  EXAM.answers[EXAM.paper.questions[EXAM.idx].id] = text;
+  examRender();
+}
+
+function examMove(delta) {
+  if (!EXAM.paper) return;
+  EXAM.idx = Math.max(0, Math.min(EXAM.paper.count - 1, EXAM.idx + delta));
+  examRender();
+}
+
+
+async function examSubmit(auto) {
+  if (!EXAM.running || !EXAM.paper) return;
+  const unanswered = EXAM.paper.count - Object.keys(EXAM.answers).length;
+  if (!auto && unanswered > 0
+      && !confirm(`${unanswered} question${unanswered === 1 ? '' : 's'} unanswered. `
+        + 'Submit anyway?')) {
+    return;
+  }
+  EXAM.running = false;
+  if (EXAM.timer) { clearInterval(EXAM.timer); EXAM.timer = null; }
+
+  const answers = EXAM.paper.questions.map((q) => ({
+    id: q.id,
+    choice: EXAM.answers[q.id] === undefined ? null : EXAM.answers[q.id],
+  }));
+  let r;
+  try {
+    r = await api('/api/exam/mark', { answers });
+  } catch (e) {
+    alert('Could not mark the paper: ' + e.message);
+    return;
+  }
+  EXAM.last = { score: r.score, total: r.total, percent: r.percent, count: r.count };
+  $('exam-run').hidden = true;
+  $('exam-result').hidden = false;
+  examShowResult(r);
+}
+
+function examShowResult(r) {
+  const pct = $('exam-pct');
+  pct.textContent = `${r.percent}%`;
+  pct.className = 'exam-pct '
+    + (r.percent >= 60 ? 'good' : r.percent >= 40 ? 'warn' : 'bad');
+  $('exam-summary').textContent =
+    `${r.score} / ${r.total} marks · ${r.answered} of ${r.count} answered`;
+
+  const by = {};
+  for (const x of r.results) {
+    by[x.week] = by[x.week] || { got: 0, tot: 0 };
+    by[x.week].tot += x.marks;
+    if (x.correct) by[x.week].got += x.marks;
+  }
+  $('exam-breakdown').textContent = 'By week: ' + Object.keys(by).sort()
+    .map((w) => `W${w} ${by[w].got}/${by[w].tot}`).join(' · ');
+
+  $('exam-review').innerHTML = r.results.map(examReviewRow).join('');
+}
+
+// Reuses the archive row styling, so a review row looks like an archive row:
+// green border if you got it, red if you did not, grey if you skipped it.
+function examReviewRow(r) {
+  const colour = r.correct === true ? 'correct'
+    : r.correct === false ? 'wrong' : 'unseen';
+  const right = r.correct_option
+    ? `<div class="ans correct-ans">✔ <b>Correct answer:</b> ${escapeHtml(r.correct_option)}</div>`
+    : '';
+  const your = r.your_choice
+    ? `<div class="ans ${r.correct ? 'your-right' : 'your-wrong'}">`
+      + `${r.correct ? '✔' : '✘'} <b>You answered:</b> ${escapeHtml(r.your_choice)}</div>`
+    : '<div class="ans your-none">— you did not answer this one</div>';
+  const verdict = r.correct ? 'correct'
+    : r.correct === false ? 'wrong' : 'not answered';
+  return `
+    <div class="arch-item ${colour}">
+      <div class="top">
+        <span class="who">${r.id} · w${r.week} · ${escapeHtml(r.topic)}</span>
+        <span class="when">${r.marks} mark${r.marks === 1 ? '' : 's'} · ${verdict}</span>
+      </div>
+      <div class="stem">${escapeHtml(r.stem)}</div>
+      ${right}
+      ${your}
+      <details><summary>Model answer</summary><pre>${escapeHtml(r.model_answer)}</pre></details>
+    </div>`;
+}
+
+function examAbandon() {
+  if (!EXAM.running) return;
+  if (!confirm('Abandon this paper? Nothing will be recorded.')) return;
+  examReset();
+}
+
+function examReset() {
+  if (EXAM.timer) { clearInterval(EXAM.timer); EXAM.timer = null; }
+  EXAM.running = false;
+  EXAM.paper = null;
+  EXAM.answers = {};
+  $('exam-run').hidden = true;
+  $('exam-result').hidden = true;
+  $('exam-setup').hidden = false;
+  examShowLast();
+}
+
+function examShowLast() {
+  const el = $('exam-last');
+  if (!EXAM.last) { el.innerHTML = ''; return; }
+  const { score, total, percent, count } = EXAM.last;
+  el.innerHTML = `<p class="muted">Last paper: <b>${score} / ${total}</b> marks `
+    + `(${percent}%) across ${count} questions.</p>`;
+}
+
+// The exam view is self-contained: no fetch on entry, and a paper in progress
+// survives navigating away and back (the clock keeps running, as it would in a
+// real exam).
+function examEnter() {
+  examShowLast();
+}
+
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -595,6 +815,14 @@ async function init() {
       renderArchive();
     });
   });
+
+  // exam mode
+  $('btn-exam-start').addEventListener('click', examStart);
+  $('btn-exam-submit').addEventListener('click', () => examSubmit(false));
+  $('btn-exam-abandon').addEventListener('click', examAbandon);
+  $('btn-exam-again').addEventListener('click', examReset);
+  $('btn-exam-prev').addEventListener('click', () => examMove(-1));
+  $('btn-exam-next').addEventListener('click', () => examMove(1));
 
   $('btn-arch-write').addEventListener('click', async () => {
     try {
