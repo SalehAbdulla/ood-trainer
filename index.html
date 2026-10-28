@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IT7006 OOD · Midterm Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <button class="brand" id="btn-brand" type="button" title="back to the quiz">
+    <span class="dot"></span>
+    <span>IT7006 · Object-Oriented Design</span>
+  </button>
+  <nav class="topbar-right">
+    <div class="chip" id="countdown" title="days until the midterm">—</div>
+    <button class="btn ghost nav-btn" id="btn-quiz" data-route="quiz" type="button">Quiz</button>
+    <button class="btn ghost nav-btn" id="btn-dash" data-route="dashboard" type="button">Dashboard</button>
+    <button class="btn ghost nav-btn" id="btn-arch" data-route="archive" type="button">Archive</button>
+  </nav>
+</header>
+
+<div class="statbar">
+  <div class="stat"><span class="k">Due now</span><span class="v" id="s-due">—</span></div>
+  <div class="stat"><span class="k">Waiting</span><span class="v" id="s-waiting">—</span></div>
+  <div class="stat"><span class="k">Mastered</span><span class="v" id="s-mastered">—</span></div>
+  <div class="stat"><span class="k">Untouched</span><span class="v" id="s-untouched">—</span></div>
+  <div class="stat"><span class="k">Session</span><span class="v" id="s-session">0 / 0</span></div>
+  <div class="stat"><span class="k">Accuracy</span><span class="v" id="s-acc">—</span></div>
+</div>
+
+<div class="progress-track"><div class="progress-fill" id="p-fill"></div></div>
+
+<main>
+
+  <!-- ============================ QUIZ VIEW ============================ -->
+  <section id="view-quiz">
+    <div class="toolbar">
+      <label class="field">
+        <span>Week</span>
+        <select id="week">
+          <option value="">all</option>
+          <option value="1">1 · approaches</option>
+          <option value="2">2 · concepts</option>
+          <option value="3">3 · UML class</option>
+          <option value="4">4 · use case + sequence</option>
+          <option value="5">5 · patterns</option>
+        </select>
+      </label>
+      <label class="field checkbox">
+        <input type="checkbox" id="all">
+        <span>Ignore due dates (sweep everything)</span>
+      </label>
+      <button class="btn" id="btn-start" type="button">Start / restart</button>
+      <span class="spacer"></span>
+      <span class="hint">keys: <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> answer · <kbd>Enter</kbd> next</span>
+    </div>
+
+    <article class="card" id="card" hidden>
+      <div class="card-head">
+        <div class="tags">
+          <span class="tag wk" id="q-week">—</span>
+          <span class="tag" id="q-topic">—</span>
+          <span class="tag marks" id="q-marks">—</span>
+          <span class="tag streak" id="q-streak">—</span>
+          <span class="tag stage" id="q-stage">—</span>
+        </div>
+        <div class="qid" id="q-id">—</div>
+      </div>
+
+      <h2 class="stem" id="q-stem">—</h2>
+
+      <div class="options" id="options"></div>
+
+      <div class="open-answer" id="open-answer" hidden>
+        <p class="muted">No options for this one — answer it in full, then self-mark honestly.</p>
+        <div class="open-buttons">
+          <button class="btn ok" id="btn-got" type="button">I got it right</button>
+          <button class="btn bad" id="btn-missed" type="button">I missed it</button>
+        </div>
+      </div>
+
+      <div class="verdict" id="verdict" hidden></div>
+
+      <div class="reveal" id="reveal" hidden>
+        <div class="reveal-block">
+          <h3>Model answer</h3>
+          <pre id="r-answer"></pre>
+        </div>
+        <div class="reveal-block tip" id="r-tip-wrap">
+          <h3>Where the marks are</h3>
+          <p id="r-tip"></p>
+        </div>
+        <div class="reveal-foot">
+          <span id="r-sched"></span>
+          <span class="advance" id="advance-hint" hidden></span>
+          <span class="spacer"></span>
+          <button class="btn ghost" id="btn-stay" type="button" title="stop the auto-advance">Stay</button>
+          <button class="btn primary" id="btn-next" type="button">Next question →</button>
+        </div>
+      </div>
+    </article>
+
+    <div class="pager" id="pager" hidden>
+      <button class="btn ghost" id="btn-prev" type="button">← Prev</button>
+      <span class="page-info" id="page-info">—</span>
+      <button class="btn ghost" id="btn-next-page" type="button">Next →</button>
+    </div>
+
+    <div class="empty" id="empty" hidden>
+      <h2 id="empty-title">Nothing due right now.</h2>
+      <p class="countdown" id="countdown-big">—</p>
+      <p id="empty-msg"></p>
+    </div>
+  </section>
+
+  <!-- ============================ ARCHIVE VIEW ========================= -->
+  <section id="view-archive" hidden>
+    <h2 class="section-title">Archive</h2>
+    <p class="muted" id="arch-ladder">—</p>
+    <div class="toolbar">
+      <div class="tabs" id="arch-filters">
+        <button class="btn ghost tab" data-filter="all" type="button">All</button>
+        <button class="btn ghost tab" data-filter="waiting" type="button">Waiting</button>
+        <button class="btn ghost tab" data-filter="mastered" type="button">Mastered</button>
+      </div>
+      <span class="spacer"></span>
+      <button class="btn" id="btn-arch-write" type="button">Save snapshot file</button>
+    </div>
+
+    <div class="due-banner" id="arch-due" hidden></div>
+
+    <div class="arch-list" id="arch-rows"></div>
+
+    <div class="pager">
+      <button class="btn ghost" id="btn-arch-prev" type="button">← Prev</button>
+      <span class="page-info" id="arch-page-info">—</span>
+      <button class="btn ghost" id="btn-arch-next" type="button">Next →</button>
+    </div>
+  </section>
+
+  <!-- ========================== DASHBOARD VIEW ========================= -->
+  <section id="view-dash" hidden>
+    <h2 class="section-title">Progress by week</h2>
+    <div class="weeks" id="weeks"></div>
+
+    <h2 class="section-title">Weakest — fix these first</h2>
+    <ol class="weakest" id="weakest"></ol>
+
+    <h2 class="section-title">Mastered / archived</h2>
+    <div class="archive" id="archive"></div>
+
+    <div class="card-like" id="progress-card" hidden>
+      <h3>Your progress</h3>
+      <p class="muted" id="storage-note">Progress is saved in this browser only.</p>
+      <p class="muted">
+        <b>Export</b> writes a <code>progress.json</code> in exactly the format the
+        Python CLI uses, so you can back it up, move it to another device, or keep
+        studying in the terminal. <b>Import</b> loads one back.
+      </p>
+      <div class="toolbar">
+        <button class="btn" id="btn-export" type="button">Export progress.json</button>
+        <button class="btn" id="btn-import" type="button">Import progress.json</button>
+        <input type="file" id="import-file" accept=".json,application/json" hidden>
+      </div>
+    </div>
+
+    <div class="danger-zone">
+      <span>Wipe all progress and start over?</span>
+      <button class="btn bad" id="btn-reset" type="button">Reset progress</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>spaced repetition · 5 min → 15 min → 1 h → 1 d → mastered (5 corrects)</span>
+  <span id="foot-source">a wrong answer sends the question back to 5 min</span>
+</footer>
+
+<script src="srs.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+{
+  "week": 5,
+  "title": "Introduction to Design Patterns",
+  "questions": [
+    {
+      "id": "w5-01",
+      "topic": "What is a pattern",
+      "marks": 5,
+      "q": "What is a software design pattern?",
+      "a": "A reusable, general solution to a commonly occurring software design problem.\nA pattern is a design idea, NOT a finished program.\nIt describes roles, responsibilities and relationships among classes/objects.\nThe same pattern can be adapted to different applications.\nThink: Problem -> General solution -> Adapt to the application.",
+      "mcq": {
+        "options": [
+          "A reusable, general solution to a commonly occurring software design problem — a design idea, not a finished program — describing roles, responsibilities and relationships among classes/objects",
+          "A finished program that can be copied into any project",
+          "A programming language feature built into C#",
+          "A testing framework for object-oriented code"
+        ],
+        "answer": 0
+      },
+      "tip": "The sentence 'a pattern is a design idea, NOT a finished program' is very often the marked point."
+    },
+    {
+      "id": "w5-02",
+      "topic": "Why patterns",
+      "marks": 5,
+      "q": "Using the payment-type if/else example, explain why we need design patterns.",
+      "a": "Code that checks paymentType with if / else if / else if (CreditCard, PayPal, BankTransfer) becomes: difficult to maintain, tightly coupled, difficult to extend, repetitive, and potentially difficult to test. The question is: what happens if we add another 10 payment types?\nExperienced developers encounter similar design problems repeatedly; a solution that works once is not necessarily a good reusable design; patterns capture proven ways of organising classes and objects; think Problem -> General solution -> Adapt to the application.",
+      "mcq": {
+        "options": [
+          "Difficult to maintain, tightly coupled, difficult to extend, repetitive and potentially difficult to test",
+          "Too slow at runtime and uses too much memory",
+          "Impossible to compile in C#",
+          "Incompatible with the Open-Closed Principle only"
+        ],
+        "answer": 0,
+        "stem": "The if / else-if chain over paymentType is bad because it becomes…"
+      },
+      "tip": "List the five code smells first, then the four reasons patterns exist."
+    },
+    {
+      "id": "w5-03",
+      "topic": "History",
+      "marks": 4,
+      "q": "Who introduced the idea of design patterns, in which book, and in what year?",
+      "a": "Christopher Alexander (1977). He was an architect and design theorist. In his book 'A Pattern Language' (1977) he introduced the idea of design patterns - reusable solutions to recurring problems in architectural design (e.g. how buildings and towns are organized).\nHis core philosophy: 'Each pattern describes a problem and the core of its solution, so that you can use this solution a million times over, without ever doing it the same way twice.'",
+      "mcq": {
+        "options": [
+          "Christopher Alexander, 'A Pattern Language' (1977) — reusable solutions to recurring problems in architectural design",
+          "Erich Gamma, 'Design Patterns' (1994)",
+          "Christopher Alexander, 'Design Patterns: Elements of Reusable Object-Oriented Software' (1994)",
+          "Ralph Johnson, 'A Pattern Language' (1994)"
+        ],
+        "answer": 0
+      },
+      "tip": "Learn the quote - it is distinctive and examiners like it."
+    },
+    {
+      "id": "w5-04",
+      "topic": "History",
+      "marks": 4,
+      "q": "Who are the Gang of Four and what did they do?",
+      "a": "The Gang of Four (GoF) are four computer scientists who popularised and formalised the concept of design patterns in software engineering in 1994, in their book 'Design Patterns: Elements of Reusable Object-Oriented Software'. The four are: 1. Erich Gamma, 2. Richard Helm, 3. Ralph Johnson, 4. John Vlissides.",
+      "mcq": {
+        "options": [
+          "Four computer scientists (Gamma, Helm, Johnson, Vlissides) who formalised design patterns in 1994 in 'Design Patterns: Elements of Reusable Object-Oriented Software'",
+          "The authors of the 1977 book 'A Pattern Language'",
+          "The four authors of the UML specification",
+          "A committee that approves C# language features"
+        ],
+        "answer": 0
+      },
+      "tip": "GoF = 1994, four authors, book 'Design Patterns: Elements of Reusable Object-Oriented Software'."
+    },
+    {
+      "id": "w5-05",
+      "topic": "Pattern categories",
+      "marks": 3,
+      "q": "What are the three categories of design patterns, and which category does each of the six patterns studied belong to?",
+      "a": "Creational, Structural and Behavioural.\nCreational: Singleton, Factory Method, Prototype, Builder.\nStructural: Adapter.\nBehavioural: Observer.",
+      "mcq": {
+        "options": [
+          "Creational (Singleton, Factory Method, Prototype, Builder), Structural (Adapter), Behavioural (Observer)",
+          "Creational (Adapter), Structural (Observer), Behavioural (Builder)",
+          "Structural (Singleton, Factory), Behavioural (Prototype, Builder), Creational (Adapter, Observer)",
+          "All six patterns are creational"
+        ],
+        "answer": 0
+      },
+      "tip": "Creational = how objects are created; structural = how objects are composed; behavioural = how objects communicate."
+    },
+    {
+      "id": "w5-06",
+      "topic": "Singleton",
+      "marks": 5,
+      "q": "Explain the Singleton pattern: the problem it solves, its typical design, its benefit and its caution.",
+      "a": "Problem: the application should have only one instance of a class. Examples: configuration manager, application logger.\nTypical design: a private constructor plus controlled access to one instance (a private static instance variable, and a public static property/method to get the instance).\nBenefit: controlled single instance.\nCaution: global state and hidden dependencies can make testing harder; it reduces the potential for parallelism within a program.",
+      "mcq": {
+        "options": [
+          "Problem: only one instance should exist (config manager, logger). Design: private constructor plus controlled access to one instance. Benefit: controlled single instance. Caution: global state and hidden dependencies make testing harder",
+          "Problem: many instances are needed. Design: public constructor. Benefit: easier testing",
+          "Problem: objects must be cloned. Design: a private clone method",
+          "Problem: incompatible interfaces. Design: a wrapper class"
+        ],
+        "answer": 0
+      },
+      "tip": "C# steps: (1) private static instance variable, (2) private constructor, (3) public static method/property to get the instance, (4) add any method you want to call from the Singleton."
+    },
+    {
+      "id": "w5-07",
+      "topic": "Factory Method",
+      "marks": 5,
+      "q": "Explain the Factory Method pattern: what problem does it solve and what is its main advantage?",
+      "a": "Problem: the client creates objects with a chain of if/else on a type string, so every new product forces a change to the main logic. Example: if (order == \"Espresso\") coffee = new Espresso(); else if (order == \"Latte\") ...; else if (order == \"Cappuccino\") ...\nFactory Method helps in the instantiation of new objects and provides extensibility: the client works with the code at a higher level of abstraction, making more room for possibilities to be adapted, and it separates business logic from implementation details.\nThe main advantage is high-level abstraction: the client depends on a general product/interface and does not know which concrete class is created.",
+      "mcq": {
+        "options": [
+          "Problem: if/else chains create products by type. Advantage: the client works at a higher level of abstraction, separating business logic from implementation details, giving extensibility",
+          "Problem: complex objects need step-by-step construction",
+          "Problem: only one instance should exist",
+          "Problem: objects are expensive to create and should be cloned"
+        ],
+        "answer": 0
+      },
+      "tip": "Tie it to the Open-Closed Principle: open for extension, closed for modification."
+    },
+    {
+      "id": "w5-08",
+      "topic": "Open-Closed",
+      "marks": 3,
+      "q": "What is the Open-Closed Principle and how do the coffee and character examples violate it?",
+      "a": "Code should be open for extension but closed for modification.\nThe coffee system originally used if (order == \"Espresso\") coffee = new Espresso(); else if (order == \"Latte\") ... - rigid, because every new coffee type meant modifying the main ordering logic.\nThe game system originally used if (type == \"Warrior\") character = new Warrior(); else if (type == \"Archer\") ... - causing redundancy and violating the Open-Closed Principle, because every new character type required changing the main creation logic.",
+      "mcq": {
+        "options": [
+          "Code should be open for extension but closed for modification — the if/else coffee and character examples force changes to the main logic for every new type",
+          "Code should be closed for extension and open for modification",
+          "Every class must be sealed",
+          "Classes must be opened before they can be used"
+        ],
+        "answer": 0
+      },
+      "tip": "Memorise the phrase: open for extension, closed for modification."
+    },
+    {
+      "id": "w5-09",
+      "topic": "Prototype",
+      "marks": 5,
+      "q": "Explain the Prototype pattern: definition, problem, solution and benefit.",
+      "a": "The Prototype pattern creates new objects by copying an existing object, known as the prototype.\nProblem: creating a new object from scratch is costly or complex, especially when the new object is very similar to an existing object. Example: creating a new Report, Document or Game Character by copying an existing object.\nSolution: Prototype creates a new object by cloning an existing object.\nBenefit: reduces the need to repeat complex object-creation logic and allows similar objects to be created efficiently.",
+      "mcq": {
+        "options": [
+          "Creates new objects by copying an existing prototype; used when creation is costly or complex; benefit: avoids repeating complex creation logic",
+          "Creates objects step by step using a director",
+          "Ensures only one instance exists",
+          "Converts one interface into another"
+        ],
+        "answer": 0
+      },
+      "tip": "Key word: clone(). A CharacterRegistry holds prototypes and clones them on demand."
+    },
+    {
+      "id": "w5-10",
+      "topic": "Builder",
+      "marks": 5,
+      "q": "Explain the Builder pattern: definition, problem, solution and key benefit.",
+      "a": "The Builder pattern is a creational design pattern that lets you construct complex objects step by step. It allows you to create different representations of an object using the same construction process.\nProblem: creating a complex object requires many steps or optional components, making the creation process difficult to manage. Without the Builder pattern the program may need a large constructor with many parameters, making the code difficult to read, manage and modify. Example: building a Computer with different CPU, RAM, storage, graphics card and other optional components.\nSolution: Builder separates the step-by-step construction of a complex object from the final object.\nKey benefit: makes complex object creation easier to manage, more readable and flexible without requiring a large constructor with many parameters.",
+      "mcq": {
+        "options": [
+          "Constructs complex objects step by step, allowing different representations using the same construction process; avoids a large constructor with many parameters",
+          "Clones existing complex objects",
+          "Notifies many observers of state changes",
+          "Ensures a single instance of a class"
+        ],
+        "answer": 0
+      },
+      "tip": "Roles: Builder (abstract interface for creating parts), ConcreteBuilder, Director, Product. The Director controls the steps; the Builder constructs the object."
+    },
+    {
+      "id": "w5-11",
+      "topic": "Builder",
+      "marks": 5,
+      "q": "Explain the roles in the Builder pattern using the motorcycle assembly example, and describe how the Director and Builder interact.",
+      "a": "Director - uses IMotorcycleBuilder (association labelled 'uses') and controls the construction steps.\nBuilder - IMotorcycleBuilder specifies an abstract interface for creating parts of a Product object.\nConcreteBuilders - SportBikeBuilder, CruiserBuilder and DirtBikeBuilder realize IMotorcycleBuilder (dashed line with hollow triangle).\nProduct - each builder creates a Motorcycle (association labelled 'builds'); Motorcycle is composed of Part (composition arrow).\nInteraction: the client uses the Director to request a motorcycle without specifying every construction step itself. The client simply asks the Director for the required configuration; the Director controls the steps and the Builder constructs the object. Adding a new ElectricBikeBuilder requires no change to the Director class.",
+      "mcq": {
+        "options": [
+          "The Director uses IMotorcycleBuilder and controls the steps; concrete builders realize the interface and build a Motorcycle; adding ElectricBikeBuilder requires no change to the Director",
+          "The Builder controls the Director and the Director builds the product",
+          "The Motorcycle realizes the builder interface",
+          "Each concrete builder must modify the Director to be registered"
+        ],
+        "answer": 0
+      },
+      "tip": "The proof that Builder works: add a new builder WITHOUT modifying the Director."
+    },
+    {
+      "id": "w5-12",
+      "topic": "Adapter",
+      "marks": 5,
+      "q": "Explain the Adapter pattern: what it is, what problem it solves and its purpose.",
+      "a": "The Adapter pattern is a structural design pattern that allows objects with incompatible interfaces to collaborate. It acts as a bridge between two interfaces that do not match. It is useful when you need to make two incompatible systems or classes work together without changing their existing code.\nProblem: the client needs to use a class, but its interface is incompatible with the interface the client expects. Example: the application expects a Payment interface, but a third-party payment service provides a different interface such as processTransaction().\nAdapter converts the interface of an existing class into the interface expected by the client.\nPurpose: allows incompatible classes to work together; promotes reusability of existing code; avoids modifying the original (Adaptee) class.",
+      "mcq": {
+        "options": [
+          "A structural pattern allowing objects with incompatible interfaces to collaborate, acting as a bridge; it promotes reuse and avoids modifying the original class or the client",
+          "A behavioural pattern that notifies multiple observers",
+          "A creational pattern that clones objects",
+          "A pattern that builds complex objects step by step"
+        ],
+        "answer": 0
+      },
+      "tip": "The benefit is always 'without modifying the existing class or the client'."
+    },
+    {
+      "id": "w5-13",
+      "topic": "Adapter structure",
+      "marks": 8,
+      "q": "Name and explain the four roles in the Adapter pattern structure.",
+      "a": "ITarget - the interface used by the client to achieve its functionality/request.\nAdapter - a class which implements the ITarget interface and inherits the Adaptee class. It is responsible for communication between Client and Adaptee.\nAdaptee - a class which has the functionality required by the client; however its interface is not compatible with the client.\nClient - a class which interacts with a type that implements the ITarget interface; however the communication class (the Adaptee) is not compatible with the client.",
+      "mcq": {
+        "options": [
+          "ITarget (the interface the client uses), Adapter (implements ITarget and communicates with the Adaptee), Adaptee (has the needed functionality but an incompatible interface), Client (uses ITarget)",
+          "ITarget (the client), Adapter (the Adaptee), Adaptee (the Adapter), Client (the interface)",
+          "Subject, Observer, ConcreteSubject, ConcreteObserver",
+          "Builder, ConcreteBuilder, Director, Product"
+        ],
+        "answer": 0
+      },
+      "tip": "Four roles: ITarget, Adapter, Adaptee, Client. One line each - a common 8-mark question."
+    },
+    {
+      "id": "w5-14",
+      "topic": "Observer",
+      "marks": 5,
+      "q": "Explain the Observer pattern: definition and the problem it solves.",
+      "a": "The Observer pattern is a behavioural design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they are observing.\nObserver is a behavioural pattern where one object (the subject) keeps a list of dependents (observers) and automatically notifies/updates them whenever its state changes, enabling decoupled one-to-many updates.",
+      "mcq": {
+        "options": [
+          "A behavioural pattern defining a subscription mechanism to notify multiple objects about events; the subject keeps a list of dependents and notifies them when its state changes, enabling decoupled one-to-many updates",
+          "A creational pattern that creates objects by cloning",
+          "A structural pattern that converts interfaces",
+          "A pattern that guarantees a single instance"
+        ],
+        "answer": 0
+      },
+      "tip": "Two definitions - the GoF-style one and the one-to-many one. Learn both."
+    },
+    {
+      "id": "w5-15",
+      "topic": "Observer structure",
+      "marks": 8,
+      "q": "Describe the structure of the Observer pattern: Subject, ConcreteSubject, Observer and ConcreteObserver.",
+      "a": "Subject - keeps a list of Observers who are interested in its updates. It provides three main functions: Attach() lets an observer subscribe for updates; Detach() lets an observer unsubscribe; Notify() sends updates to all subscribed observers when something changes. (Think of a YouTube channel - subscribers attach to the channel, and whenever the channel posts a new video, all subscribers get notified.)\nConcreteSubject - the real object being observed; it has its own state and a method GetState() to return that state. When the state changes it calls Notify() to alert all observers. Example: a Weather Station stores the current temperature and notifies displays when the temperature changes.\nObserver - an interface (a blueprint) with a single method Update(), which tells the observer what to do when the subject changes. Any class that wants to listen must implement this interface.\nConcreteObserver - implements the Observer interface; it keeps a reference to the ConcreteSubject so it can read its state; when Update() is called it refreshes itself based on the subject's latest state. Example: a Weather App Display updates its screen when the Weather Station broadcasts a new temperature.",
+      "mcq": {
+        "options": [
+          "Subject: Attach(), Detach(), Notify(). ConcreteSubject: holds state, GetState(), calls Notify() on change. Observer: interface with Update(). ConcreteObserver: implements Update() and keeps a reference to the ConcreteSubject",
+          "Subject: Update(). Observer: Attach/Detach/Notify",
+          "Observer holds the state; Subject calls Update() on itself",
+          "Subject and Observer are the same class"
+        ],
+        "answer": 0
+      },
+      "tip": "Three Subject methods: Attach, Detach, Notify. Plus GetState on the ConcreteSubject and Update on the Observer."
+    },
+    {
+      "id": "w5-16",
+      "topic": "Observer purpose",
+      "marks": 4,
+      "q": "What is the purpose of the Observer pattern?",
+      "a": "Establishes a one-to-many relationship between objects.\nWhen the Subject changes, it automatically notifies and updates all dependent Observers.\nEnsures consistent data across all related components.\nReduces tight coupling between objects, making the system more flexible and maintainable.",
+      "mcq": {
+        "options": [
+          "Establishes a one-to-many relationship; notifies and updates all dependents automatically; ensures consistent data; reduces tight coupling",
+          "Guarantees that only one instance exists",
+          "Builds complex objects step by step",
+          "Converts CSV data into JSON"
+        ],
+        "answer": 0
+      },
+      "tip": "Four bullets - the last one (reduces tight coupling) is the reason patterns exist."
+    },
+    {
+      "id": "w5-17",
+      "topic": "Patterns and APIE",
+      "marks": 8,
+      "q": "Explain how the design patterns relate to APIE (abstraction, polymorphism, inheritance, encapsulation).",
+      "a": "Abstraction: Factory - the client depends on a general product/interface (Notification -> Email, SMS, Push); Observer - the Subject communicates through a common interface (Appointment -> Observer); Adapter - the Adapter provides the interface expected by the client (PaymentAdapter -> third-party payment).\nPolymorphism: Factory - different products implement the same interface differently (Email/SMS/Push each implement send()); Observer - different observers respond differently to the same notification (Patient/Receptionist respond to update()).\nInheritance: Builder - different builders can specialise a common builder structure (WoodenHouseBuilder / ConcreteHouseBuilder); Prototype - specialised objects can reuse cloning behaviour (Document / Report).\nEncapsulation: Factory - hides object creation details (the Factory creates the required notification); Builder - hides complex construction steps (the Builder creates a House step-by-step); Singleton - controls creation and access to one instance (one DatabaseManager); Prototype - hides object-copying details (clone() creates a copy); Adapter - hides interface-conversion details (the Adapter converts client calls to the third-party API).",
+      "mcq": {
+        "options": [
+          "Factory to Abstraction (client depends on a general product/interface) and Polymorphism (Email/SMS/Push each implement send() differently); Adapter to Encapsulation (hides interface conversion); Singleton to Encapsulation (controls one instance)",
+          "Observer to Inheritance; Builder to Polymorphism only",
+          "Adapter to Inheritance; Factory to Inheritance",
+          "All six patterns rely on deep inheritance hierarchies"
+        ],
+        "answer": 0,
+        "stem": "Which pattern-to-APIE mapping is correct?"
+      },
+      "tip": "Finish with the conclusion: patterns are applications of OOD principles, not separate magic techniques."
+    },
+    {
+      "id": "w5-18",
+      "topic": "Pattern selection",
+      "marks": 10,
+      "q": "Choose and apply the best design pattern for each example, and justify your answer: (1) A meal-kit service lets customers pick a base (vegan/seafood/chicken) and then add sides, sauces and dessert; the kitchen system must assemble each box step-by-step based on the chosen options. (2) A weather platform pushes alerts (heat wave, sandstorm, flooding) to many endpoints - mobile apps, SMS gateways and campus dashboards - whenever conditions change. (3) A new analytics engine consumes events as JSON, but an older sensor gateway only emits CSV lines; you must integrate them without changing either system. (4) A travel app lets users choose a transport ticket (bus, metro or ferry); the app should create the correct ticket object at runtime based on the user's selection, and be easy to extend with new ticket types. (5) An online whiteboard needs to duplicate complex shapes (with nested styles, connectors and constraints) quickly so users can make variations without reconstructing from scratch.",
+      "a": "1. Builder Pattern - assemble a meal box step-by-step (base, sides, sauces, dessert) with a builder/director to ensure valid combinations.\n2. Observer Pattern - the weather service (subject) notifies multiple subscribers (apps, SMS, dashboards) whenever alerts change.\n3. Adapter Pattern - wrap the CSV-emitting gateway with an adapter that exposes the JSON interface your analytics engine expects.\n4. Factory Method - create the correct ticket object (Bus/Metro/Ferry) at runtime; easy to add new ticket types later.\n5. Prototype Pattern - clone complex shapes to duplicate them quickly, then tweak the copies without rebuilding from scratch.",
+      "mcq": {
+        "options": [
+          "Builder (meal box step-by-step), Observer (weather alerts to many endpoints), Adapter (CSV gateway to JSON engine), Factory Method (ticket chosen at runtime), Prototype (clone complex shapes)",
+          "Observer, Builder, Factory, Adapter, Prototype",
+          "Factory, Observer, Adapter, Builder, Prototype",
+          "Prototype, Adapter, Observer, Builder, Factory"
+        ],
+        "answer": 0
+      },
+      "tip": "This is the Week 6 Task 2 question almost word-for-word - the single highest-probability exam question. Key words: step-by-step = Builder; notify many = Observer; incompatible interfaces = Adapter; create at runtime = Factory; clone = Prototype."
+    },
+    {
+      "id": "w5-19",
+      "topic": "Pattern picker",
+      "marks": 6,
+      "q": "Name the pattern for each clue: (a) only one instance of a class may exist; (b) objects must be created by cloning an existing object; (c) an object must notify an unknown number of dependents when its state changes; (d) a class must expose a different interface to the one it has; (e) a complex object must be built in many optional steps; (f) the concrete class to instantiate must be decided at runtime.",
+      "a": "(a) Singleton.\n(b) Prototype.\n(c) Observer.\n(d) Adapter.\n(e) Builder.\n(f) Factory Method.",
+      "mcq": {
+        "options": [
+          "Singleton, Prototype, Observer, Adapter, Builder, Factory Method",
+          "Singleton, Factory, Observer, Adapter, Prototype, Builder",
+          "Factory, Prototype, Builder, Adapter, Observer, Singleton",
+          "Builder, Observer, Adapter, Factory, Prototype, Singleton"
+        ],
+        "answer": 0,
+        "stem": "(a) only one instance; (b) created by cloning; (c) notify an unknown number of dependents; (d) expose a different interface; (e) built in many optional steps; (f) class decided at runtime."
+      },
+      "tip": "Drill this until it is instant recall - it covers all six patterns in one question."
+    },
+    {
+      "id": "w5-20",
+      "topic": "Pattern justification",
+      "marks": 4,
+      "q": "How should you justify a pattern choice in an exam answer?",
+      "a": "State the pattern name, then link it to the KEY WORD in the scenario, then state the benefit in the scenario's own terms. For example: 'Builder - the meal box must be assembled step by step from a base plus optional sides, sauces and dessert, so Builder separates this step-by-step construction from the final MealBox object and allows new options to be added without changing the Director.'\nA good justification mentions: (1) the pattern name, (2) the design problem (many optional steps / many subscribers / incompatible interfaces / runtime choice / expensive duplication), (3) the benefit (extensibility, decoupling, reuse, no modification of existing code).",
+      "mcq": {
+        "options": [
+          "Name the pattern, link it to the key word in the scenario, then state the design problem and the benefit (extensibility, decoupling, reuse, no modification of existing code)",
+          "Just name the pattern — the marks are for the name only",
+          "Describe the pattern's history and original author",
+          "Draw the GoF diagram and say nothing else"
+        ],
+        "answer": 0
+      },
+      "tip": "Never just name the pattern - the marks are in the justification."
+    },
+    {
+      "id": "w5-21",
+      "topic": "Pattern notation",
+      "marks": 6,
+      "q": "In the GoF pattern structure diagrams, what do the following notations mean: solid arrow, dashed-line arrow, solid head with dashed arrow body, and the yellow/grey dotted boxes?",
+      "a": "Solid arrow = extends (ConcreteCreator extends Creator).\nDashed-line arrow = implements (ConcreteProduct implements IProduct).\nSolid head with dashed arrow body = instantiates (ConcreteCreator instantiates ConcreteProduct).\nYellow box with dotted lines = Interfaces.\nGrey box with dotted lines = Abstract Classes.",
+      "mcq": {
+        "options": [
+          "Solid arrow = extends; dashed-line arrow = implements; solid head with dashed arrow body = instantiates; yellow dotted box = interface; grey dotted box = abstract class",
+          "Solid arrow = implements; dashed arrow = extends; yellow box = abstract class",
+          "Dotted boxes indicate deprecated classes",
+          "All arrows in GoF diagrams mean the same thing"
+        ],
+        "answer": 0
+      },
+      "tip": "This is the GoF book syntax slide - four notations plus the two box colours."
+    },
+    {
+      "id": "w5-22",
+      "topic": "Pattern structure",
+      "marks": 5,
+      "q": "Explain the classes involved in the Factory Method structure and their relationships.",
+      "a": "Creator - declares the factory method; it may be abstract.\nConcreteCreator - extends Creator and implements the factory method to instantiate a concrete product (instantiates relationship).\nIProduct - the product interface that all products implement.\nConcreteProduct - implements IProduct.\nRelationship to memorise: ConcreteCreator extends Creator (solid arrow), ConcreteProduct implements IProduct (dashed-line arrow), ConcreteCreator instantiates ConcreteProduct (solid head with dashed arrow body).",
+      "mcq": {
+        "options": [
+          "Creator declares the factory method (may be abstract); ConcreteCreator extends Creator and instantiates a ConcreteProduct; IProduct is implemented by ConcreteProduct; client code depends only on Creator and IProduct",
+          "Client code depends directly on every concrete product class",
+          "ConcreteProduct extends Creator",
+          "IProduct extends ConcreteProduct"
+        ],
+        "answer": 0
+      },
+      "tip": "Client code depends on Creator and IProduct only - that is the high-level abstraction."
+    },
+    {
+      "id": "w5-23",
+      "topic": "Pattern vs library vs framework",
+      "marks": 6,
+      "q": "Distinguish between a design pattern, a library and a framework.",
+      "a": "Design pattern - a reusable DESIGN solution. It is design guidance.\nLibrary - reusable CODE that provides functionality.\nFramework - a STRUCTURE that guides application development.\nA pattern asks: 'How should these classes/objects be organised?'\nSo the three operate at different levels: pattern = design, library = code, framework = structure. A pattern is not code you can import, and it is not a skeleton your application plugs into.",
+      "mcq": {
+        "options": [
+          "Pattern = a reusable design solution (design guidance); Library = reusable code providing functionality; Framework = a structure that guides application development. A pattern asks how classes/objects should be organised",
+          "Pattern = reusable code; Library = a structure; Framework = a design solution",
+          "All three are the same thing described at different scales",
+          "Pattern = a finished program; Library = a UML diagram; Framework = a test suite"
+        ],
+        "answer": 0
+      },
+      "tip": "The exam-ready contrast is three levels: pattern = DESIGN, library = CODE, framework = STRUCTURE. Finish with the pattern's own question about organising classes."
+    },
+    {
+      "id": "w5-24",
+      "topic": "Advantages of patterns",
+      "marks": 5,
+      "q": "State five advantages of using design patterns.",
+      "a": "1. Shared vocabulary for developers.\n2. Reusable and maintainable designs.\n3. Can reduce coupling and improve separation of responsibilities.\n4. Help communicate design decisions.\n5. Provide proven approaches to recurring problems.",
+      "mcq": {
+        "options": [
+          "Shared vocabulary for developers; reusable and maintainable designs; can reduce coupling and improve separation of responsibilities; help communicate design decisions; provide proven approaches to recurring problems",
+          "Faster runtime, smaller binaries, no need for testing, no documentation, automatic code generation",
+          "They remove the need for a design phase and make UML unnecessary",
+          "They guarantee the program compiles and runs on any platform"
+        ],
+        "answer": 0
+      },
+      "tip": "Five bullets - learn them verbatim. 'Shared vocabulary' is the one people forget and it is usually worth a mark."
+    },
+    {
+      "id": "w5-25",
+      "topic": "GOF categories",
+      "marks": 6,
+      "q": "Name the three categories of GOF design patterns and give the guiding question for each.",
+      "a": "1. Creational Design Patterns - how are those objects going to be instantiated/created?\n2. Structural Design Patterns - how do those objects combine with other objects and form a bigger entity, which should also be scalable in future?\n3. Behavioural Design Patterns - how do those objects communicate, in a way that can anticipate future changes easily and with fewer side effects?\nThe underlying mindset is to think in terms of objects everywhere, considering maintainability, scalability, expressiveness and stability - a 'mind-set for good coding'.",
+      "mcq": {
+        "options": [
+          "Creational = how are objects created/instantiated; Structural = how do objects combine into a bigger, scalable entity; Behavioural = how do objects communicate with fewer side effects",
+          "Creational = how objects communicate; Structural = how objects are created; Behavioural = how objects combine",
+          "Creational = how objects are destroyed; Structural = how objects are tested; Behavioural = how objects are documented",
+          "The three categories are Singleton, Factory and Observer"
+        ],
+        "answer": 0
+      },
+      "tip": "Learn the category -> question pairs: Creational = HOW CREATED, Structural = HOW COMBINED into a bigger entity, Behavioural = HOW THEY COMMUNICATE."
+    },
+    {
+      "id": "w5-26",
+      "topic": "Six patterns - keywords",
+      "marks": 6,
+      "q": "Give the one-word keyword and the main question for each of the six patterns.",
+      "a": "Singleton - ONE - do I need only one shared instance?\nPrototype - COPY - can I create a new object by copying an existing one?\nFactory - CREATE - which object should I create?\nObserver - NOTIFY - who needs to know when something changes?\nBuilder - BUILD - how do I construct a complex object step-by-step?\nAdapter - CONVERT - how can I make incompatible interfaces work together?",
+      "mcq": {
+        "options": [
+          "Singleton = ONE; Prototype = COPY; Factory = CREATE; Observer = NOTIFY; Builder = BUILD; Adapter = CONVERT",
+          "Singleton = COPY; Prototype = ONE; Factory = BUILD; Observer = CONVERT; Builder = CREATE; Adapter = NOTIFY",
+          "Singleton = CREATE; Prototype = NOTIFY; Factory = ONE; Observer = BUILD; Builder = COPY; Adapter = CONVERT",
+          "Singleton = BUILD; Prototype = CONVERT; Factory = NOTIFY; Observer = COPY; Builder = ONE; Adapter = CREATE"
+        ],
+        "answer": 0
+      },
+      "tip": "This keyword table is pure recall and easy marks. Learn the six words: ONE, COPY, CREATE, NOTIFY, BUILD, CONVERT."
+    },
+    {
+      "id": "w5-27",
+      "topic": "C# Singleton code",
+      "marks": 6,
+      "q": "Describe the C# implementation of the Singleton pattern, step by step.",
+      "a": "Step 1: create a private static instance variable.\nStep 2: make the constructor private - this prevents clients from creating 'new' instances.\nStep 3: create a public static method/property to get the instance, which contains the private instantiation logic and uses the global state property.\nStep 4: add any method you want to call from the Singleton.\nSo: private static instance + private constructor + public static accessor = one shared instance, and the client class simply calls the accessor.",
+      "mcq": {
+        "options": [
+          "1. private static instance variable; 2. private constructor; 3. public static method/property to get the instance; 4. add any methods you want to call from the Singleton",
+          "1. public static instance variable; 2. public constructor; 3. private static method; 4. no other methods allowed",
+          "1. private constructor only; 2. no instance variable needed; 3. create with new each time",
+          "1. an interface with one method; 2. a concrete class implementing it; 3. a registry"
+        ],
+        "answer": 0
+      },
+      "tip": "Four steps in order. The two that carry the marks are the PRIVATE constructor and the PUBLIC STATIC accessor."
+    },
+    {
+      "id": "w5-28",
+      "topic": "C# pattern shapes",
+      "marks": 8,
+      "q": "The lecture shows C# code for each pattern. Describe the C# shape of the Factory Method and of the Observer.",
+      "a": "Factory Method in C#:\n- an abstract Creator (or interface) declaring the factory method\n- a ConcreteCreator extending it, whose factory method returns a new concrete product\n- an IProduct interface that all products implement (each with its own send()/prepare())\n- the client holds a Creator and an IProduct and never calls new on a concrete product, so adding a new product means adding a class, not editing the client.\nObserver in C#:\n- an Observer interface with a single Update() method\n- a Subject holding a list of Observers, with Attach(), Detach() and Notify()\n- a ConcreteSubject (e.g. OrderService) with its own state and GetState(); when SetStatus() changes the state it calls Notify()\n- ConcreteObservers (EmailService, SmsService, OpsDashboard, LoyaltyService) implementing Update() and reacting independently, each holding a reference to the subject.",
+      "mcq": {
+        "options": [
+          "Factory: abstract Creator + ConcreteCreator returning a concrete product, all products implementing IProduct, and the client never calling new on a concrete product. Observer: Observer interface with Update(); Subject with Attach/Detach/Notify; ConcreteSubject with state and GetState() calling Notify() on change; ConcreteObservers implementing Update()",
+          "Factory: a single class with an if/else chain that creates every product type. Observer: a class that loops over a hard-coded list of the concrete services",
+          "Factory: the product classes create the factory. Observer: the observers call the subject directly on a timer",
+          "Both patterns require deep inheritance hierarchies and no interfaces"
+        ],
+        "answer": 0
+      },
+      "tip": "Answer as two lists of classes and their relationships. Mention that in both cases the client depends only on the interface - that is the point of the pattern."
+    }
+  ]
+}

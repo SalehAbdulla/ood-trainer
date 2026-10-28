@@ -1,0 +1,523 @@
+{
+  "week": 3,
+  "title": "UML Class Diagrams & Relationships",
+  "questions": [
+    {
+      "id": "w3-01",
+      "topic": "What is UML",
+      "marks": 3,
+      "q": "What does UML stand for and what is it? Is it a programming language?",
+      "a": "UML = Unified Modeling Language. It is a standard visual language for modelling software systems. UML helps developers visualize, communicate and document a design. UML is NOT a programming language.",
+      "mcq": {
+        "options": [
+          "Unified Modeling Language — a standard visual language for modelling software; it is NOT a programming language",
+          "Unified Modelling Language — a programming language with graphical syntax",
+          "Universal Modelling Layer — a database design standard",
+          "Unified Method Library — a set of C# class libraries"
+        ],
+        "answer": 0
+      },
+      "tip": "The last sentence is worth a mark - examiners often ask 'is UML a programming language?' to catch people out."
+    },
+    {
+      "id": "w3-02",
+      "topic": "Why UML",
+      "marks": 4,
+      "q": "Compare 'without UML' and 'with UML' when explaining a system to students, and give four things a reader can understand from a class diagram.",
+      "a": "Without UML: explaining the system verbally becomes difficult to understand (e.g. 'the student inherits from user, the student has a relationship with course, the lecturer also has a relationship with course, and course contains...'). With UML: students can understand the structure immediately. UML allows us to see the design before we implement it.\nFrom a class diagram a reader can understand: what classes exist; what data they contain; what operations they provide; how classes relate; which classes inherit from others.",
+      "mcq": {
+        "options": [
+          "What classes exist, what data they contain, what operations they provide, how classes relate, which classes inherit from others",
+          "The exact runtime performance and memory usage of each class",
+          "The deployment topology and server configuration",
+          "The order in which messages are sent at runtime"
+        ],
+        "answer": 0,
+        "stem": "What can a reader understand from a class diagram?"
+      },
+      "tip": "Five bullets - memorise all five."
+    },
+    {
+      "id": "w3-03",
+      "topic": "Why UML",
+      "marks": 6,
+      "q": "Why use UML in OOD? Give six reasons.",
+      "a": "1. Understand the system before writing code.\n2. Identify classes and responsibilities.\n3. Show how classes interact and depend on each other.\n4. Communicate a design with other developers.\n5. Detect design problems early.\n6. Provide a bridge: Requirements -> UML -> C#.",
+      "mcq": {
+        "options": [
+          "Understand the system before coding, identify classes and responsibilities, show how classes interact and depend, communicate the design, detect design problems early, bridge Requirements to UML to C#",
+          "To replace the need for requirements documents",
+          "To generate the database schema automatically",
+          "To measure code coverage"
+        ],
+        "answer": 0
+      },
+      "tip": "UML is also a communication tool between Business Analyst, Software Designer, Developer, Tester and Client."
+    },
+    {
+      "id": "w3-04",
+      "topic": "UML diagram types",
+      "marks": 6,
+      "q": "Draw/describe the UML diagram taxonomy. Give three structural and three behavioural UML diagrams.",
+      "a": "UML Diagram splits into Structural UML Diagram and Behavioral UML Diagram.\nStructural: Class Diagram, Object Diagram, Component Diagram, Composite Structure Diagram, Deployment Diagram, Package Diagram, Profile Diagram.\nBehavioural: Activity Diagram, Use Case Diagram, Interaction Overview Diagram, Timing Diagram, State Machine Diagram, Communication Diagram, Sequence Diagram.",
+      "mcq": {
+        "options": [
+          "Structural (Class, Object, Component, Composite Structure, Deployment, Package, Profile) versus Behavioural (Activity, Use Case, Interaction Overview, Timing, State Machine, Communication, Sequence)",
+          "Class, Use Case and Sequence are all structural; Activity and Deployment are behavioural",
+          "There is only one category of UML diagram",
+          "Structural diagrams show runtime behaviour; behavioural diagrams show static structure"
+        ],
+        "answer": 0
+      },
+      "tip": "Structural = static structure (what exists). Behavioural = dynamic behaviour (what happens). Class Diagram is structural; Use Case and Sequence are behavioural."
+    },
+    {
+      "id": "w3-05",
+      "topic": "Class notation",
+      "marks": 3,
+      "q": "What are the three sections of a UML class, in order?",
+      "a": "1. Class name (top).\n2. Attributes / properties (middle).\n3. Operations / methods (bottom).\nExample: Student / - studentId : int, - name : string, - email : string / + EnrolCourse() : void, + DisplayInfo() : void.",
+      "mcq": {
+        "options": [
+          "Class name (top), attributes/properties (middle), operations/methods (bottom)",
+          "Operations (top), name (middle), attributes (bottom)",
+          "Attributes (top), name (middle), operations (bottom)",
+          "Name, then a list of relationships, then a list of packages"
+        ],
+        "answer": 0
+      },
+      "tip": "Name, attributes, operations - in that order, top to bottom."
+    },
+    {
+      "id": "w3-06",
+      "topic": "Visibility",
+      "marks": 4,
+      "q": "Give the four UML visibility symbols, their names and their meanings.",
+      "a": "+ Public - everyone can access it (front door / public entrance).\n- Private - only the class itself can access it (personal bedroom / safe).\n# Protected - class + subclasses (derived) can access it (family-only area).\n~ Package - classes in the same package can access it (residents of the same building).",
+      "mcq": {
+        "options": [
+          "+ public (everyone), - private (only the class), # protected (class and subclasses), ~ package (same package)",
+          "+ private, - public, # package, ~ protected",
+          "+ protected, - public, # private, ~ package",
+          "There are only two visibilities in UML: public and private"
+        ],
+        "answer": 0
+      },
+      "tip": "Learn the house analogy - it makes the four symbols stick."
+    },
+    {
+      "id": "w3-07",
+      "topic": "UML syntax",
+      "marks": 4,
+      "q": "Write the UML syntax for an attribute and for an operation, and give one example of each.",
+      "a": "Attribute syntax: [visibility] [name] : [type]\nExample: - firstname : string  -> the attribute is private and the data type is string.\nOperation syntax: [visibility] [method](parameters) : [returnType]\nExamples: + CalculateGPA() : double  -> public method returning a double.\n+ RegisterCourse(course : Course) : void  -> public method with a passing parameter and no return value.",
+      "mcq": {
+        "options": [
+          "Attribute: [visibility] [name] : [type], e.g. - firstname : string. Operation: [visibility] [method](parameters) : [returnType], e.g. + CalculateGPA() : double",
+          "Attribute: [visibility] [name]([type]). Operation: [visibility] [returnType] [method]",
+          "Attribute: [name] = [type]. Operation: [method] -> [returnType]",
+          "Attribute: [type] [name]. Operation: [returnType] [method]()"
+        ],
+        "answer": 0,
+        "stem": "Which is the correct UML syntax for an attribute and an operation?"
+      },
+      "tip": "Attributes use ':' before the type; operations use '(parameters) :' before the return type."
+    },
+    {
+      "id": "w3-08",
+      "topic": "Relationships",
+      "marks": 3,
+      "q": "What is a UML relationship and why are relationships needed? Name the five important relationships.",
+      "a": "Classes rarely exist independently - they interact with other classes. A relationship shows how two or more model elements are connected, and relationships help explain structure, communication and reuse.\nThe five important relationships are: Association, Aggregation, Composition, Generalization/Inheritance, and Dependency.",
+      "mcq": {
+        "options": [
+          "Association, Aggregation, Composition, Generalization/Inheritance, Dependency",
+          "Association, Realization, Inheritance, Aggregation, Implementation",
+          "Composition, Generalization, Realization, Interface, Package",
+          "Dependency, Coupling, Cohesion, Inheritance, Association"
+        ],
+        "answer": 0
+      },
+      "tip": "List all five - if you miss one you lose a mark."
+    },
+    {
+      "id": "w3-09",
+      "topic": "Association",
+      "marks": 4,
+      "q": "Explain association. Does association mean ownership? What are roles?",
+      "a": "In UML, an association means that two classes are connected because their objects interact with or are related to each other. Example: Student ---- Course - a Student is associated with a Course. Relationship names (labels) can clarify meaning: Student -- enrols in -- Course. Association does NOT automatically mean ownership.\nRoles act as labels describing how each class participates in the relationship. Example: Customer -- places -- Order; the Customer role is 'customer' (the person who places the order) and the Order role is 'orders' (the order placed by the customer).",
+      "mcq": {
+        "options": [
+          "Their objects interact or are related; the association does not automatically mean ownership; roles label how each class participates",
+          "One class owns the other and controls its lifecycle",
+          "One class inherits from the other",
+          "One class temporarily uses another as a method parameter"
+        ],
+        "answer": 0
+      },
+      "tip": "The 'does not automatically mean ownership' sentence is the key mark."
+    },
+    {
+      "id": "w3-10",
+      "topic": "Multiplicity",
+      "marks": 5,
+      "q": "List the five multiplicity values used in this course and their meaning.",
+      "a": "1 = exactly one.\n0..1 = zero or one.\n0..* = zero or many.\n1..* = one or many.\n* = many.",
+      "mcq": {
+        "options": [
+          "1 = exactly one; 0..1 = zero or one; 0..* = zero or many; 1..* = one or many; * = many",
+          "1 = one or many; 0..1 = none; 0..* = exactly one; 1..* = zero or many",
+          "1 = zero or one; 0..* = one or many; 1..* = zero or many",
+          "Only 1 and * are valid multiplicities in UML"
+        ],
+        "answer": 0
+      },
+      "tip": "Read multiplicity from the far end: 'One Customer can have zero or many Orders' means the 0..* sits at the Order end."
+    },
+    {
+      "id": "w3-11",
+      "topic": "Multiplicity",
+      "marks": 4,
+      "q": "A Customer places Orders and an Order contains OrderItems. Give the multiplicities and read the relationships aloud.",
+      "a": "Customer (1) -- places -- (0..*) Order: read as 'One Customer can have zero or many Orders'.\nOrder (1) -- contains -- (1..*) OrderItem: read as 'One Order contains one or more OrderItems'.",
+      "mcq": {
+        "options": [
+          "Customer end 1, Order end 0..*; Order end 1, OrderItem end 1..*",
+          "Customer end 0..*, Order end 1; Order end 1..*, OrderItem end 1",
+          "Both ends are 1..* in both associations",
+          "Customer end 1, Order end 1; Order end 1, OrderItem end 1"
+        ],
+        "answer": 0,
+        "stem": "One Customer can place zero or many Orders; one Order contains one or more OrderItems. Where do the multiplicities sit?"
+      },
+      "tip": "Notice OrderItem is 1..* - the slides specify at least one OrderItem per Order, not zero."
+    },
+    {
+      "id": "w3-12",
+      "topic": "Many-to-many",
+      "marks": 3,
+      "q": "Model 'students enrol in courses' as a many-to-many association, and state the follow-up question this raises.",
+      "a": "Student (0..*) -- Enrol in -- (0..*) Course. One student can enrol in many courses and one course can have many students.\nThe follow-up question is: what if the enrolment itself has data? (e.g. enrolmentDate, grade, status) - this leads to an association class.",
+      "mcq": {
+        "options": [
+          "Student 0..* - Enrol in - 0..* Course; this raises the question of whether the enrolment itself has data (enrolmentDate, grade, status)",
+          "Student 1 - Enrol in - 1 Course; many-to-many is not possible in UML",
+          "Student 0..1 - Enrol in - 0..1 Course",
+          "Student 1..* - Enrol in - 1..* Course, with no further question"
+        ],
+        "answer": 0
+      },
+      "tip": "Always raise the association-class question after a many-to-many - it shows deeper understanding."
+    },
+    {
+      "id": "w3-13",
+      "topic": "Association class",
+      "marks": 5,
+      "q": "What is an association class? When should you use one, and how is it drawn?",
+      "a": "An association class holds data/behaviour that belongs to the relationship itself rather than to either class.\nExample: Enrollment may contain enrollmentDate, grade, status. These details do not belong directly to Student or Course - they belong to the relationship between a particular Student and a particular Course.\nUse an association class when the relationship has important data or behaviour. This prevents relationship-specific information from being forced into Student or Course.\nIn UML, an Association Class is connected to the association line using a dashed (dotted) line.",
+      "mcq": {
+        "options": [
+          "It holds data/behaviour belonging to the relationship itself (e.g. Enrollment: enrollmentDate, grade, status) and is attached to the association with a dashed line",
+          "It is a class that inherits from two other classes",
+          "It is a class with no attributes, used only for grouping",
+          "It is attached to the association with a solid filled line"
+        ],
+        "answer": 0
+      },
+      "tip": "In EA: right-click the class > Advanced > Association Class > select the association connector."
+    },
+    {
+      "id": "w3-14",
+      "topic": "Aggregation",
+      "marks": 4,
+      "q": "Explain aggregation. Give the symbol and an example.",
+      "a": "Aggregation represents a whole-part relationship. Symbol: hollow diamond (on the whole side). The part can exist independently of the whole. Think: 'has parts, but parts have an independent lifecycle.' It is a weaker whole-part relationship.\nExample: Department (whole) - Lecturer (part). If the department closes, the lecturer still exists and can teach in another department. The lecturer is not dependent on the department for existence.",
+      "mcq": {
+        "options": [
+          "Whole-part with a hollow diamond; the part can exist independently — e.g. Department to Lecturer (the lecturer survives if the department closes)",
+          "Whole-part with a filled diamond; the part's lifecycle is tied to the whole",
+          "A weak form of inheritance between two classes",
+          "A temporary dependency shown as a dashed arrow"
+        ],
+        "answer": 0
+      },
+      "tip": "Aggregation = 'has'. Hollow diamond = weak, parts survive."
+    },
+    {
+      "id": "w3-15",
+      "topic": "Composition",
+      "marks": 4,
+      "q": "Explain composition. Give the symbol and an example.",
+      "a": "Composition represents a strong whole-part relationship. Symbol: filled/solid diamond. The part's lifecycle is strongly tied to the whole. Think: 'the whole owns the parts.'\nExample: Order (whole) contains one or more OrderItems. If the Order is removed, its OrderItems generally have no independent meaning in this model. Use composition only when the lifecycle/ownership relationship is justified.",
+      "mcq": {
+        "options": [
+          "Strong whole-part with a filled diamond; the part's lifecycle is tied to the whole — e.g. Order to OrderItem",
+          "Whole-part with a hollow diamond; the part survives independently",
+          "A many-to-many association with an association class",
+          "A dependency where one class uses another as a parameter"
+        ],
+        "answer": 0
+      },
+      "tip": "Composition = 'strongly owns'. Filled diamond = lifecycle tied."
+    },
+    {
+      "id": "w3-16",
+      "topic": "Aggregation vs composition",
+      "marks": 5,
+      "q": "Summarise the difference between association, aggregation and composition.",
+      "a": "Association = simply related.\nAggregation (hollow diamond) = whole-part, but parts can exist independently; 'has'.\nComposition (filled diamond) = strong whole-part, lifecycle is tied to the whole; 'strongly owns'.",
+      "mcq": {
+        "options": [
+          "Association = simply related; Aggregation (hollow diamond) = has, parts survive; Composition (filled diamond) = strongly owns, lifecycle tied",
+          "Association = owns; Aggregation = inherits; Composition = depends",
+          "Aggregation = strong ownership; Composition = weak ownership",
+          "All three are drawn identically with a solid line"
+        ],
+        "answer": 0
+      },
+      "tip": "Three lines, three symbols. This is a classic 5-mark short answer."
+    },
+    {
+      "id": "w3-17",
+      "topic": "Generalization",
+      "marks": 4,
+      "q": "Explain generalization/inheritance. Which way does the triangle point, and what is the relationship called?",
+      "a": "Generalization represents an 'is-a' relationship. The hollow triangle points toward the general/base class. Example: Student is a type of User. It supports specialisation and reuse.",
+      "mcq": {
+        "options": [
+          "An is-a relationship; the hollow triangle points toward the general/base class",
+          "A whole-part relationship; the triangle points at the part",
+          "An is-a relationship; the triangle points toward the specialised subclass",
+          "A dependency; shown as a dashed arrow"
+        ],
+        "answer": 0
+      },
+      "tip": "Mnemonic: the triangle always points at the PARENT (the more general class)."
+    },
+    {
+      "id": "w3-18",
+      "topic": "Generalization",
+      "marks": 5,
+      "q": "Model User with Student and Lecturer subclasses. What does the parent hold and what does each child add?",
+      "a": "User contains the common features shared by both Student and Lecturer: name, email, password.\nStudent adds features specific to students, such as studentID and programme.\nLecturer adds features specific to lecturers, such as staffId and department.\nThis is the 'is-a' relationship: Student is a User, Lecturer is a User.",
+      "mcq": {
+        "options": [
+          "User holds the common features (name, email, password); Student adds studentID and programme; Lecturer adds staffId and department",
+          "Student holds name/email/password; User adds studentID",
+          "Each of the three classes repeats all attributes independently",
+          "Lecturer inherits from Student"
+        ],
+        "answer": 0
+      },
+      "tip": "Structure the answer as: parent = common features; children = specific features."
+    },
+    {
+      "id": "w3-19",
+      "topic": "Inheritance and APIE",
+      "marks": 8,
+      "q": "Using the User/Student/Lecturer example, explain how inheritance relates to all four APIE principles.",
+      "a": "Abstraction: User represents the general concept - focus on the important common features and hide unnecessary details.\nInheritance: specialised classes (Student, Lecturer) reuse features from the general class (User).\nPolymorphism: same operation, different behaviour - Student and Lecturer can implement common operations differently.\nEncapsulation: protect internal data and control how it is accessed - attributes can be hidden behind public operations/properties.\nUML makes the relationships between the APIE principles visible.",
+      "mcq": {
+        "options": [
+          "Abstraction: User is the general concept. Inheritance: Student and Lecturer reuse User's features. Polymorphism: same operation, different behaviour. Encapsulation: attributes hidden behind public operations",
+          "Abstraction: Student is the general concept. Inheritance: User inherits from Student",
+          "Polymorphism: User has many constructors. Encapsulation: User's fields are public",
+          "Inheritance: User inherits from both Student and Lecturer (multiple class inheritance)"
+        ],
+        "answer": 0,
+        "stem": "In the User/Student/Lecturer example, which APIE mapping is correct?"
+      },
+      "tip": "High-value synthesis question - one paragraph per letter of APIE."
+    },
+    {
+      "id": "w3-20",
+      "topic": "Interface",
+      "marks": 6,
+      "q": "What is an interface? What can and cannot it contain? How many can a class implement/extend?",
+      "a": "An interface is a UML classifier/type that defines a contract of operations that implementing classes must provide.\nIt does not have any implementation. It can contain only method declarations, not method definitions. It cannot contain any member data. It may only have declarations of events, methods and properties. Methods declared in an interface must be implemented by the classes that implement the interface. Like an abstract class, an interface cannot be instantiated.\nA class can implement more than one interface but extend only one class.",
+      "mcq": {
+        "options": [
+          "A contract of operations; it has no implementation, contains only method/event/property declarations, no member data, cannot be instantiated — and a class can implement many interfaces but extend only one class",
+          "A class with concrete methods that cannot be instantiated",
+          "A class that can contain attributes and be instantiated once",
+          "A UML note attached to an association"
+        ],
+        "answer": 0
+      },
+      "tip": "The final sentence is the most examinable: multiple interfaces, single base class."
+    },
+    {
+      "id": "w3-21",
+      "topic": "Interface",
+      "marks": 4,
+      "q": "Explain interfaces as capabilities/contracts using the smartphone example.",
+      "a": "Interfaces represent capabilities or contracts. A smart phone has the capability to take a photo and play music. A Smartphone does not need to inherit from a Camera or a MusicPlayer class. Instead, it implements the capabilities provided by the interfaces (Camera and MusicPlayer).",
+      "mcq": {
+        "options": [
+          "A Smartphone implements the Camera and MusicPlayer interfaces rather than inheriting from those classes — capabilities are implemented, not inherited",
+          "A Smartphone must inherit from Camera and MusicPlayer",
+          "Interfaces are used only for data storage",
+          "A Smartphone must be an abstract class to have capabilities"
+        ],
+        "answer": 0
+      },
+      "tip": "The point: capabilities are 'implemented', not 'inherited'."
+    },
+    {
+      "id": "w3-22",
+      "topic": "Abstract class",
+      "marks": 4,
+      "q": "What is an abstract class? Give an example.",
+      "a": "An abstract class is a class that is designed to be a base or parent class for other classes. It represents a general concept and cannot be used to create an object directly (it cannot be instantiated).\nExample: consider Animal. We know animals exist, but in a system we may want to create specific animals such as Dog or Cat - so Animal is abstract and Dog/Cat are concrete subclasses.",
+      "mcq": {
+        "options": [
+          "A class designed as a base/parent representing a general concept that cannot be instantiated — e.g. Animal, with Dog and Cat as concrete subclasses",
+          "A class with no methods at all",
+          "A class that can be instantiated exactly once",
+          "A synonym for an interface in UML"
+        ],
+        "answer": 0
+      },
+      "tip": "In EA, mark a class abstract via right-click > Properties > Details > tick Abstract; the class name then shows in italics."
+    },
+    {
+      "id": "w3-23",
+      "topic": "Abstract vs interface",
+      "marks": 8,
+      "q": "Compare an abstract class, an interface and inheritance across instantiation, method implementation, attributes and inheritance.",
+      "a": "Instantiation: Abstract class - cannot be instantiated; Interface - cannot be instantiated; Inheritance - child classes can be instantiated if they are not abstract.\nMethod implementation: Abstract class - can have both abstract and concrete methods; Interface - defines required methods (modern C# interfaces can also provide default implementations); Inheritance - child class inherits implemented methods from the parent and can add or override methods.\nAttributes: Abstract class - can contain attributes; Interface - cannot contain instance attributes; Inheritance - child class inherits accessible attributes.\nInheritance: A class can inherit from only one base class; A class can implement multiple interfaces; C# supports single class inheritance - one child class can inherit from one parent class.",
+      "mcq": {
+        "options": [
+          "Abstract class: cannot be instantiated, can have abstract AND concrete methods, can contain attributes, single base class. Interface: cannot be instantiated, defines required methods, no instance attributes, multiple interfaces allowed",
+          "Abstract class: can be instantiated, no attributes. Interface: can contain instance attributes, single implementation only",
+          "Abstract class: multiple class inheritance allowed. Interface: only one can be implemented",
+          "Abstract class: only abstract methods allowed. Interface: can contain attributes"
+        ],
+        "answer": 0,
+        "stem": "Which description of abstract class versus interface versus inheritance is correct?"
+      },
+      "tip": "Four rows, three columns. Practise writing this as a table."
+    },
+    {
+      "id": "w3-24",
+      "topic": "Dependency",
+      "marks": 4,
+      "q": "Explain dependency. How is it shown, what is a typical C# example, and how strong is it?",
+      "a": "Dependency means one class temporarily uses or depends on another. It is usually shown as a dashed arrow. A typical C# example is a method that receives another class as a parameter. Dependency is generally weaker than a structural association.",
+      "mcq": {
+        "options": [
+          "One class temporarily uses or depends on another; shown as a dashed arrow; typical C# example is a method receiving another class as a parameter; weaker than association",
+          "One class owns another and controls its lifecycle",
+          "One class inherits from another",
+          "A strong whole-part relationship"
+        ],
+        "answer": 0
+      },
+      "tip": "Keywords: temporarily, dashed arrow, weaker than association."
+    },
+    {
+      "id": "w3-25",
+      "topic": "Relationship summary",
+      "marks": 5,
+      "q": "Complete the relationship summary: give the symbol and meaning for Association, Aggregation, Composition, Generalization and Dependency.",
+      "a": "Association - plain solid line - related to / interacts with.\nAggregation - hollow diamond - whole-part; parts independent.\nComposition - filled diamond - strong whole-part; lifecycle connected.\nGeneralization - hollow triangle - is-a / inheritance.\nDependency - dashed arrow - uses / temporarily depends on.",
+      "mcq": {
+        "options": [
+          "Association = solid line, related to; Aggregation = hollow diamond, whole-part with independent parts; Composition = filled diamond, strong whole-part with connected lifecycle; Generalization = hollow triangle, is-a; Dependency = dashed arrow, uses",
+          "Aggregation = filled diamond; Composition = hollow diamond",
+          "Generalization = dashed arrow; Dependency = hollow triangle",
+          "Association = hollow diamond; Aggregation = solid line"
+        ],
+        "answer": 0
+      },
+      "tip": "Learn this as five symbol-meaning pairs; it appears in almost every UML question."
+    },
+    {
+      "id": "w3-26",
+      "topic": "Choosing a relationship",
+      "marks": 6,
+      "q": "How do you choose the right relationship? Give the decision table.",
+      "a": "Are the classes simply related? -> Association.\nIs it a whole-part relationship? -> Aggregation or Composition.\nCan the part exist independently? -> Aggregation.\nIs the part's lifecycle tied to the whole? -> Composition.\nIs one class a specialised type of another? -> Generalization.\nDoes one class simply use another? -> Dependency.",
+      "mcq": {
+        "options": [
+          "Simply related? Association. Whole-part? Aggregation or Composition. Part can exist independently? Aggregation. Lifecycle tied to the whole? Composition. Specialised type? Generalization. Simply uses? Dependency",
+          "Simply related? Generalization. Part can exist independently? Composition",
+          "Whole-part? Dependency. Uses another? Aggregation",
+          "Specialised type? Composition. Lifecycle tied? Dependency"
+        ],
+        "answer": 0,
+        "stem": "Which question-to-relationship mapping is correct?"
+      },
+      "tip": "Frame your answer as question -> relationship. This is the highest-value Week 3 answer."
+    },
+    {
+      "id": "w3-27",
+      "topic": "UML to C#",
+      "marks": 4,
+      "q": "How does UML map to C#? Give four mappings.",
+      "a": "UML describes the intended design; C# implements the design.\nUML association -> may become a reference/property.\nUML multiplicity -> may become a collection such as List.\nUML generalisation -> becomes inheritance.\nUML interface realisation -> becomes an interface implementation.",
+      "mcq": {
+        "options": [
+          "Association becomes a reference/property; multiplicity becomes a collection such as List; generalization becomes inheritance; interface realization becomes interface implementation",
+          "Association becomes inheritance; multiplicity becomes a single field; generalization becomes a List",
+          "UML diagrams compile directly to IL without generating code",
+          "Realization becomes composition in C#"
+        ],
+        "answer": 0
+      },
+      "tip": "This is why EA can 'Generate Source Code' from the diagram."
+    },
+    {
+      "id": "w3-28",
+      "topic": "Scenario practice",
+      "marks": 6,
+      "q": "Choose and justify a relationship for each case: (a) Department and Lecturer, where a lecturer can transfer to another department; (b) Order and OrderItem, where items have no meaning without the order; (c) Customer and Order, where a customer places many orders; (d) Student and User.",
+      "a": "(a) Aggregation (hollow diamond): whole-part, but the Lecturer (part) has an independent lifecycle - the lecturer exists and can teach in another department.\n(b) Composition (filled diamond): strong whole-part - the lifecycle of OrderItem is tied to the Order; without the Order the items have no independent meaning.\n(c) Association, labelled 'places', with multiplicity Customer 1 -- 0..* Order: simply related, no ownership.\n(d) Generalization: Student is-a User - Student is a specialised type of User.",
+      "mcq": {
+        "options": [
+          "(a) Aggregation; (b) Composition; (c) Association; (d) Generalization",
+          "(a) Composition; (b) Aggregation; (c) Generalization; (d) Association",
+          "(a) Association; (b) Dependency; (c) Composition; (d) Aggregation",
+          "(a) Generalization; (b) Composition; (c) Aggregation; (d) Dependency"
+        ],
+        "answer": 0,
+        "stem": "(a) Department/Lecturer where a lecturer can transfer; (b) Order/OrderItem where items have no meaning without the order; (c) Customer places many Orders; (d) Student is a User."
+      },
+      "tip": "Always give the relationship name AND the lifecycle/ownership justification - that is where the marks are."
+    },
+    {
+      "id": "w3-29",
+      "topic": "Key takeaways",
+      "marks": 6,
+      "q": "State the key takeaways of the UML class diagram week.",
+      "a": "UML is a visual language for modelling software.\nClass diagrams describe structure: classes, attributes and operations.\nRelationships explain how classes are connected.\nMultiplicity describes the number of participating instances.\nGood relationship choices come from analysing requirements and object lifecycles.\nUML provides a bridge from OOD concepts to C# implementation.",
+      "mcq": {
+        "options": [
+          "UML is a visual language; class diagrams describe structure; relationships explain connections; multiplicity gives participating instances; good relationship choices come from requirements and object lifecycles; UML bridges OOD to C#",
+          "UML is a programming language; class diagrams describe runtime behaviour",
+          "Multiplicity describes the number of methods in a class",
+          "Relationships are decorative and optional in a class diagram"
+        ],
+        "answer": 0
+      },
+      "tip": "Six one-line statements - useful as a final-night revision list."
+    },
+    {
+      "id": "w3-30",
+      "topic": "Requirements to UML",
+      "marks": 6,
+      "q": "Explain the 'From Requirements to UML' pipeline, using the requirement 'A student can enrol in many courses'.",
+      "a": "1. Start from the real-world requirement: 'A student can enrol in many courses.'\n2. Object-Oriented Analysis (OOA): identify the concepts - Student, Course.\n3. Ask: how are they related? (an association, labelled 'enrols in')\n4. Ask: how many objects can participate? (multiplicity 0..* at both ends)\n5. Model the relationship and multiplicity in a UML class diagram.\n6. Then implement the design in C#.\nThe chain is: Real-world problem -> OOA -> identify classes -> identify attributes and methods -> identify relationships -> UML class diagram -> implementation in C#.",
+      "mcq": {
+        "options": [
+          "Requirement -> OOA -> identify classes -> identify attributes/methods -> identify relationships -> UML class diagram -> implement in C#",
+          "Requirement -> write the C# first -> generate the class diagram from the code",
+          "Requirement -> draw a sequence diagram -> write the database schema -> code",
+          "Requirement -> identify actors -> draw a use case diagram -> implement in C#"
+        ],
+        "answer": 0
+      },
+      "tip": "Draw the pipeline as a vertical flow: requirement, then each step, then C#. The two 'ask' questions (related? how many?) are the marked steps."
+    }
+  ]
+}

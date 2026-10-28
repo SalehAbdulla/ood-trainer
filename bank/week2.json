@@ -1,0 +1,450 @@
+{
+  "week": 2,
+  "title": "Understanding Object-Oriented Concepts and Design",
+  "questions": [
+    {
+      "id": "w2-01",
+      "topic": "Class vs object",
+      "marks": 4,
+      "q": "Distinguish between a class, an object and an instance. Give an example.",
+      "a": "Class -> a blueprint/template that defines structure and behaviour.\nObject -> a concrete entity created from a class.\nInstance -> an individual object belonging to a class.\nIn everyday OOP terminology, object and instance are often used interchangeably.\nExample: Student is the class; student1 (Ahmad) and student2 (Husain) are objects/instances of that class. In C#: Student s1 = new Student(); Student s2 = new Student();",
+      "mcq": {
+        "options": [
+          "Class = blueprint/template; Object = a concrete entity created from a class; Instance = an individual object belonging to a class (object and instance are used interchangeably)",
+          "Class = a running program; Object = a source file; Instance = a compiled binary",
+          "Class = one specific record; Object = the table holding records; Instance = a column",
+          "Class = a method; Object = a property; Instance = a namespace"
+        ],
+        "answer": 0
+      },
+      "tip": "One-line definition each, then the example. State that object and instance are used interchangeably."
+    },
+    {
+      "id": "w2-02",
+      "topic": "Class vs object",
+      "marks": 2,
+      "q": "Which comes first - the class or the object - and what is the point of Object-Oriented Design according to the lecture?",
+      "a": "Classes come first and are used to create objects. The entire point of Object-Oriented Design is not about objects, it is about classes.",
+      "mcq": {
+        "options": [
+          "Classes come first and are used to create objects — the point of OOD is about classes, not objects",
+          "Objects come first; classes are derived later by grouping similar objects",
+          "They are created simultaneously by the compiler",
+          "Instances come first; classes are a documentation artefact only"
+        ],
+        "answer": 0
+      },
+      "tip": "This is a memorable one-liner the lecturer emphasised - quote it."
+    },
+    {
+      "id": "w2-03",
+      "topic": "Object state",
+      "marks": 3,
+      "q": "What is an object in a computer system? How are state and behaviour represented?",
+      "a": "An object is a concrete entity that has state and behaviour. State is represented by data/attributes. Behaviour is represented by methods. Objects interact by invoking operations and exchanging information.",
+      "mcq": {
+        "options": [
+          "An object is a concrete entity with state and behaviour; state is represented by data/attributes and behaviour by methods",
+          "An object has behaviour only; state is stored in global variables",
+          "An object has state only; behaviour belongs to the class, not the object",
+          "An object is a function that returns state on demand"
+        ],
+        "answer": 0
+      },
+      "tip": "State = attributes (data); Behaviour = methods. Then add the interaction sentence."
+    },
+    {
+      "id": "w2-04",
+      "topic": "Attributes",
+      "marks": 3,
+      "q": "What are attributes? Explain how two objects of the same class can differ.",
+      "a": "Attributes represent data or characteristics of an object, and they contribute to the object's state. Different objects of the same class can have different attribute values. Example: the Student class has attributes Name, StudentID, Age, Programme; Student s1 has Name=\"John\", Age=20 while Student s2 has Name=\"Mary\", Age=21.",
+      "mcq": {
+        "options": [
+          "Attributes represent data/characteristics and contribute to state; different objects of the same class can have different attribute values",
+          "Attributes are fixed for all objects of a class and cannot differ",
+          "Attributes define behaviour and are also called methods",
+          "Attributes exist only in UML and have no code equivalent"
+        ],
+        "answer": 0
+      },
+      "tip": "The key idea: same class, same attributes, different values per object."
+    },
+    {
+      "id": "w2-05",
+      "topic": "Methods",
+      "marks": 3,
+      "q": "What is a method? What can methods do with an object's state?",
+      "a": "A method represents an operation or behaviour. Methods can read or change the object's state. Methods also provide services to other objects.",
+      "mcq": {
+        "options": [
+          "A method represents an operation/behaviour; it can read or change the object's state and provides services to other objects",
+          "A method only reads state and may never change it",
+          "A method is a data field with a type",
+          "A method is a synonym for a class"
+        ],
+        "answer": 0
+      },
+      "tip": "Two roles: (1) they operate on the object's own state, (2) they provide services to other objects."
+    },
+    {
+      "id": "w2-06",
+      "topic": "Instantiation",
+      "marks": 2,
+      "q": "What is instantiation?",
+      "a": "Each object is an instance of a particular class, and the process of creating these objects is called instantiation. Example: from the class Dog, each dog has its own name, weight and breed.",
+      "mcq": {
+        "options": [
+          "The process of creating objects from a class — each object is an instance of that class",
+          "The process of converting a class into an interface",
+          "The process of deleting unused objects",
+          "The process of copying a class into another namespace"
+        ],
+        "answer": 0
+      },
+      "tip": "Definition + one example is enough."
+    },
+    {
+      "id": "w2-07",
+      "topic": "Data + behaviour",
+      "marks": 4,
+      "q": "Why combine data and behaviour in the same object? Use the BankAccount example.",
+      "a": "Keeping related data and operations together supports encapsulation. The object can protect its internal state. Other parts of the system interact through defined operations. This reduces accidental changes and clarifies responsibility - the object controls its own state. Example: BankAccount has private balance with Deposit(), Withdraw() and Transfer() methods, so the object controls its own state rather than external code editing the balance directly.",
+      "mcq": {
+        "options": [
+          "It supports encapsulation: the object protects its internal state, others interact through defined operations, and this reduces accidental changes and clarifies responsibility",
+          "It reduces the number of files in a project",
+          "It makes code run faster by caching attributes",
+          "It removes the need for constructors"
+        ],
+        "answer": 0
+      },
+      "tip": "Four payoffs: encapsulation, protected state, interaction through defined operations, reduced accidental changes."
+    },
+    {
+      "id": "w2-08",
+      "topic": "APIE",
+      "marks": 8,
+      "q": "State the four core Object-Oriented concepts (APIE) and define each in one line.",
+      "a": "A - Abstraction: show what matters; hide unnecessary detail.\nP - Polymorphism: one interface; different implementations.\nI - Inheritance: create a specialised type from an existing type.\nE - Encapsulation: bundle data + behaviour and protect invariants.",
+      "mcq": {
+        "options": [
+          "Abstraction (show what matters, hide detail), Polymorphism (one interface, different implementations), Inheritance (specialised type from an existing type), Encapsulation (bundle data + behaviour and protect invariants)",
+          "Abstraction, Polymorphism, Interface, Encapsulation",
+          "Association, Polymorphism, Inheritance, Encapsulation",
+          "Abstraction, Polymorphism, Inheritance, Extension"
+        ],
+        "answer": 0
+      },
+      "tip": "Memorise the acronym APIE and the four one-liners verbatim - this is almost guaranteed to appear."
+    },
+    {
+      "id": "w2-09",
+      "topic": "Abstraction",
+      "marks": 3,
+      "q": "Define abstraction and illustrate it with the bank account example.",
+      "a": "Abstraction is focusing on the essential features of an object while hiding unnecessary implementation details: focus on what is important (identify the essential characteristics and behaviours of an object) and ignore what is unnecessary (hide details that are not relevant).\nExample: instead of modelling one specific bank account, we define a BankAccount class that represents the general concept of a bank account. The ATM exposes withdraw() and deposit() without knowing how the balance is internally updated.",
+      "mcq": {
+        "options": [
+          "Focusing on the essential features while hiding unnecessary implementation detail — e.g. defining a general BankAccount concept, with the ATM exposing withdraw()/deposit() without knowing how the balance is updated",
+          "Hiding an object's data behind private fields and public getters only",
+          "Allowing one class to inherit the behaviour of another",
+          "Allowing the same method call to behave differently per object"
+        ],
+        "answer": 0
+      },
+      "tip": "Abstraction = what/essential. Encapsulation = how/protection. Do not mix them up."
+    },
+    {
+      "id": "w2-10",
+      "topic": "Encapsulation",
+      "marks": 4,
+      "q": "Explain encapsulation. Give the three key points and a C# example.",
+      "a": "Encapsulation bundles data and behaviour together and protects invariants.\nKey points: (1) Control access to data - an object's internal data should not normally be accessed or changed directly from outside the object. (2) Hide implementation details - other objects interact through the public methods/interface without needing to know how it works internally. (3) Protect valid behaviour/invariants.\nC# example:\nclass BankAccount {\n    private decimal balance;\n    public void Deposit(decimal amount) { if (amount > 0) balance += amount; }\n}\nThe balance cannot be set to an invalid value from outside.",
+      "mcq": {
+        "options": [
+          "Bundling data + behaviour and controlling access: internal data is not accessed directly from outside, and implementation details are hidden behind public methods",
+          "Modelling only the essential characteristics of an object and ignoring irrelevant detail",
+          "Creating a specialised class from an existing class",
+          "Defining a contract of operations that implementing classes must provide"
+        ],
+        "answer": 0
+      },
+      "tip": "Mention the private field + public method pair - that is the classic demonstration."
+    },
+    {
+      "id": "w2-11",
+      "topic": "Inheritance",
+      "marks": 5,
+      "q": "Explain inheritance. What is the relationship called, and what three things can a subclass do?",
+      "a": "Inheritance allows a new class to reuse the attributes and methods of an existing class. A new class, called a subclass (child class), can inherit features from an existing superclass (parent class). It represents an is-a relationship.\nThe subclass can: (1) reuse inherited features, (2) add its own attributes and methods, (3) customise or override inherited behaviour.",
+      "mcq": {
+        "options": [
+          "A subclass inherits attributes and methods from a superclass (is-a); it can reuse inherited features, add its own, and override inherited behaviour",
+          "A class acquires a copy of another class's private fields only",
+          "Two classes are linked because their objects interact",
+          "A class hides its internal state from other classes"
+        ],
+        "answer": 0
+      },
+      "tip": "Base = superclass = parent; Derived = subclass = child. Say 'is-a'."
+    },
+    {
+      "id": "w2-12",
+      "topic": "Polymorphism",
+      "marks": 4,
+      "q": "Explain polymorphism and illustrate it with the calculateInterest() example.",
+      "a": "Polymorphism means \"many forms\". It allows different objects to respond to the same method call in different ways. Different classes can have the same method name, and each class can provide its own implementation; when the method is called, the appropriate implementation is executed depending on the object.\nExample: a general BankAccount class has calculateInterest(). ChequeAccount and SavingsAccount both use the same method name calculateInterest() but perform different calculations.",
+      "mcq": {
+        "options": [
+          "Different objects respond to the same method call in different ways — e.g. ChequeAccount and SavingsAccount both define calculateInterest() with different logic",
+          "A class can have many constructors with different parameter lists",
+          "A subclass reuses the parent's attributes without change",
+          "An object can hold data of any type in a single field"
+        ],
+        "answer": 0
+      },
+      "tip": "Key sentence: 'same method call, different implementation chosen by the object'."
+    },
+    {
+      "id": "w2-13",
+      "topic": "APIE",
+      "marks": 4,
+      "q": "What is the main advantage of each of the four core OOP concepts?",
+      "a": "Abstraction -> reduce complexity (simplifies).\nPolymorphism -> increase flexibility (provides flexibility).\nInheritance -> reuse code (reuses).\nEncapsulation -> protect data (protects).",
+      "mcq": {
+        "options": [
+          "Abstraction reduces complexity; Polymorphism increases flexibility; Inheritance reuses code; Encapsulation protects data",
+          "Abstraction reuses code; Polymorphism protects data; Inheritance reduces complexity; Encapsulation increases flexibility",
+          "Abstraction protects data; Polymorphism reuses code; Inheritance increases flexibility; Encapsulation reduces complexity",
+          "All four mainly improve runtime performance"
+        ],
+        "answer": 0
+      },
+      "tip": "Four-word answer: reduces, flexible, reuses, protects."
+    },
+    {
+      "id": "w2-14",
+      "topic": "OOP vs OOD",
+      "marks": 6,
+      "q": "Distinguish between OOP and OOD. Give the focus, the question each asks, and the artefacts of each.",
+      "a": "OOP - a programming paradigm / way of implementing software.\n  Focus: programming / implementation.\n  Question: How do we implement with objects?\n  Artefacts: classes, objects, methods, code.\nOOD - a design activity / way of deciding what the software should look like.\n  Focus: design / structure.\n  Question: What objects should exist and collaborate?\n  Artefacts: class diagrams, sequence diagrams, responsibilities.\nExample contrast: class Order: ... (OOP) vs Order collaborates with Payment and Restaurant (OOD).",
+      "mcq": {
+        "options": [
+          "OOP: a programming paradigm — how do we implement with objects? Classes/objects/methods/code. OOD: a design activity — what objects should exist and collaborate? Class and sequence diagrams, responsibilities",
+          "OOP: a design activity with diagrams. OOD: a programming paradigm with classes and methods",
+          "OOP and OOD are synonyms; there is no distinction",
+          "OOP is only for C#; OOD is only for UML tools"
+        ],
+        "answer": 0,
+        "stem": "Which row correctly distinguishes OOP from OOD?"
+      },
+      "tip": "Do not mix them up - this exact table is in the slides. Learn the 3 rows."
+    },
+    {
+      "id": "w2-15",
+      "topic": "OOAD",
+      "marks": 4,
+      "q": "What is Object-Oriented Analysis and Design (OOAD)?",
+      "a": "To create the best solutions you should follow a detailed analysis process for determining the project's requirements (defining what the system is supposed to do), then develop a design that satisfies them (deciding how the system should do it), then carefully review the design (and have it reviewed by other software professionals) before writing any code. If this process involves analysing and designing the system from an object-oriented point of view, it is called an OOAD process. Languages like C# are object oriented; OOP allows you to implement an object-oriented design as a working system.",
+      "mcq": {
+        "options": [
+          "A process that analyses requirements (what the system should do), develops a design satisfying them (how), and reviews it before coding — all from an object-oriented point of view",
+          "A process that writes code first, then reverse-engineers diagrams from it",
+          "A database normalisation technique for object schemas",
+          "A testing methodology for object-oriented systems"
+        ],
+        "answer": 0
+      },
+      "tip": "Three stages: define what -> decide how -> review before coding."
+    },
+    {
+      "id": "w2-16",
+      "topic": "OOD workflow",
+      "marks": 6,
+      "q": "Describe the simple OOD workflow (its six steps).",
+      "a": "1. Understand requirements & use cases.\n2. Identify nouns, verbs, domain concepts.\n3. Assign responsibilities.\n4. Relate associations, inheritance, dependencies.\n5. Model UML class / interaction diagrams.\n6. Refine - check cohesion, coupling, changeability.\nImportant: design is iterative. You rarely get the perfect class model on the first attempt.",
+      "mcq": {
+        "options": [
+          "Understand requirements and use cases, identify nouns/verbs/domain concepts, assign responsibilities, relate associations/inheritance/dependencies, model UML class and interaction diagrams, then refine (cohesion, coupling, changeability)",
+          "Write code, generate diagrams, refactor, deploy, test, document",
+          "Identify actors, write use cases, implement, test, release",
+          "Design classes, normalise the database, generate code, optimise"
+        ],
+        "answer": 0
+      },
+      "tip": "Always finish with the sentence 'design is iterative' - it is explicitly in the slides."
+    },
+    {
+      "id": "w2-17",
+      "topic": "Why OOD",
+      "marks": 6,
+      "q": "Give six benefits of using OOD.",
+      "a": "1. Manage complexity - break large systems into meaningful components.\n2. Modularity - give components clear responsibilities.\n3. Encapsulation - protect state and reduce unintended dependencies.\n4. Reuse - use classes/components across multiple parts of a system.\n5. Extensibility - add new behaviour with less disruption.\n6. Maintainability - localise change and make the system easier to understand.",
+      "mcq": {
+        "options": [
+          "Manage complexity, modularity, encapsulation, reuse, extensibility, maintainability",
+          "Faster execution, smaller memory, fewer files, better syntax highlighting",
+          "Automatic testing, automatic documentation, no need for design",
+          "Stronger typing, better error messages, faster compilation"
+        ],
+        "answer": 0
+      },
+      "tip": "The slides bold the keyword at the start of each line - use those as your headings."
+    },
+    {
+      "id": "w2-18",
+      "topic": "When OOD fits",
+      "marks": 4,
+      "q": "When is OOD particularly useful? Give examples of systems.",
+      "a": "Large business applications; systems with many entities and relationships; applications expected to evolve over time; systems developed and maintained by multiple developers. Examples: banking, e-commerce, university, hospital and reservation systems. Still choose pragmatically - not every small program needs an object-oriented design.",
+      "mcq": {
+        "options": [
+          "Large business applications, systems with many entities and relationships, systems expected to evolve, systems built by multiple developers (banking, e-commerce, university, hospital)",
+          "Only systems with fewer than ten classes",
+          "Only real-time embedded systems",
+          "Only programs that run without an operating system"
+        ],
+        "answer": 0
+      },
+      "tip": "Add the pragmatic caveat at the end to show balanced judgement."
+    },
+    {
+      "id": "w2-19",
+      "topic": "Bad design",
+      "marks": 5,
+      "q": "Explain the statement: 'OOP does not automatically mean good design.'",
+      "a": "A system can use classes and still be poorly designed. Too many classes can create unnecessary complexity. Deep inheritance hierarchies can be difficult to maintain. Classes with too many responsibilities become hard to test and change. Good OOD is about responsibilities, relationships, cohesion, coupling and appropriate abstraction - not simply about having classes.",
+      "mcq": {
+        "options": [
+          "A system can use classes and still be poorly designed — too many classes, deep inheritance hierarchies, and classes with too many responsibilities all hurt",
+          "Using classes always guarantees good design",
+          "Poor design only happens in procedural code",
+          "Good design is purely about code formatting and naming"
+        ],
+        "answer": 0
+      },
+      "tip": "Give the four failure modes, then the 'good OOD is about...' list."
+    },
+    {
+      "id": "w2-20",
+      "topic": "Good design",
+      "marks": 6,
+      "q": "What should we look for in good Object-Oriented Design?",
+      "a": "High cohesion - a class has a focused, meaningful responsibility.\nLow coupling - classes do not depend unnecessarily on many details of other classes.\nEncapsulation - protect internal state and enforce valid behaviour.\nClear responsibilities - avoid \"God classes\" that do everything.\nMeaningful abstractions - model concepts that make sense in the problem domain.\nDesign for change - isolate parts likely to vary.",
+      "mcq": {
+        "options": [
+          "High cohesion, low coupling, encapsulation, clear responsibilities (avoid God classes), meaningful abstractions, design for change",
+          "Many small classes, deep inheritance, public fields for convenience",
+          "One class per screen, with all logic in the controller",
+          "Maximum reuse through global variables and static helpers"
+        ],
+        "answer": 0
+      },
+      "tip": "Good example: Payment -> payment responsibilities; Order -> order responsibilities; Customer -> customer responsibilities. Bad: one class doing payment + orders + reports + email."
+    },
+    {
+      "id": "w2-21",
+      "topic": "Cohesion",
+      "marks": 3,
+      "q": "Define cohesion and give an example of high and low cohesion.",
+      "a": "Cohesion = how focused is the class. A class has high cohesion when everything inside it contributes to one main responsibility.\nHigh cohesion example: a BankAccount class where all methods relate to managing a bank account.\nLow cohesion example: a class whose methods perform unrelated jobs (e.g. payment, reporting and emailing in one class).",
+      "mcq": {
+        "options": [
+          "How focused a class is — high cohesion means everything inside contributes to one main responsibility",
+          "How dependent classes are on each other's internal details",
+          "How many methods a class exposes publicly",
+          "How many classes exist in a package"
+        ],
+        "answer": 0
+      },
+      "tip": "One-line definition + the phrase 'how focused is the class'."
+    },
+    {
+      "id": "w2-22",
+      "topic": "Coupling",
+      "marks": 3,
+      "q": "Define coupling and explain what low coupling means.",
+      "a": "Coupling = how dependent are classes on each other. Low coupling means one class does not depend too heavily on the internal details of another class. Some coupling is normal - e.g. Order needs information about a Customer - but in good OOP design we keep this dependency controlled and minimal rather than having classes know unnecessary details about each other.",
+      "mcq": {
+        "options": [
+          "How dependent classes are on each other — low coupling means a class does not depend heavily on another's internal details; some coupling is normal but should be controlled and minimal",
+          "How focused a class is on one responsibility",
+          "The number of attributes in a class",
+          "The depth of the inheritance hierarchy"
+        ],
+        "answer": 0
+      },
+      "tip": "Do not say 'zero coupling' - say 'controlled and minimal'."
+    },
+    {
+      "id": "w2-23",
+      "topic": "God class",
+      "marks": 2,
+      "q": "What is a 'God class' and why is it a problem?",
+      "a": "A God class is a class that does everything - e.g. payment + orders + reports + email. It has low cohesion and many responsibilities, so it becomes hard to test, hard to change and hard to understand. Good design gives each class clear responsibilities instead.",
+      "mcq": {
+        "options": [
+          "A class that does everything (payment + orders + reports + email) — low cohesion, many responsibilities, hard to test and change",
+          "A class that inherits from many interfaces",
+          "A class with a private constructor",
+          "An abstract class with no concrete methods"
+        ],
+        "answer": 0
+      },
+      "tip": "Link it to low cohesion."
+    },
+    {
+      "id": "w2-24",
+      "topic": "Mini coding challenge",
+      "marks": 8,
+      "q": "Given a design that stores orders as List<Dictionary<string, object>> with AddOrder(...) and CancelOrder(order) { order[\"status\"] = \"CANCELLED\"; } - answer: (1) what data belongs together? (2) who should be responsible for cancelling an order? (3) what could become difficult as the system grows? (4) sketch a possible Order class.",
+      "a": "(1) The following data belongs to an Order: Customer, Items, Status. Therefore a class is a natural abstraction.\n(2) The Order object itself should have the responsibility, because the status belongs to the Order. Rather than OrderManager.CancelOrder(order); we prefer order.Cancel();\n(3) Potential problems: dictionary keys are strings; no compile-time type safety; status can be changed incorrectly; order rules are scattered; difficult to add behaviour; difficult to maintain; Customer and Order information are not clearly modelled.\n(4) class Order { public string CustomerName { get; } public List<string> Items { get; } public OrderStatus Status { get; private set; } public Order(string customerName, List<string> items) { CustomerName = customerName; Items = items; Status = OrderStatus.New; } public void Cancel() { if (Status != OrderStatus.Delivered) { Status = OrderStatus.Cancelled; } } } plus enum OrderStatus { New, Preparing, OutForDelivery, Delivered, Cancelled }.",
+      "mcq": {
+        "options": [
+          "Introduce an Order class owning Customer, Items and Status, with order.Cancel() enforcing its own rules — external code should not manage Order data",
+          "Keep the dictionary but rename the keys to constants",
+          "Move CancelOrder into a static helper class",
+          "Replace the dictionary with a string array for speed"
+        ],
+        "answer": 0,
+        "stem": "Orders are stored as List<Dictionary<string,object>> with a free-standing CancelOrder(order) that sets order['status']='CANCELLED'. What is the correct redesign?"
+      },
+      "tip": "The design improvement the slides want: BEFORE external code manages Order data; AFTER Order manages its own state and behaviour - this introduces encapsulation."
+    },
+    {
+      "id": "w2-25",
+      "topic": "Domain model",
+      "marks": 3,
+      "q": "What is a domain model?",
+      "a": "A Domain Model is a high-level conceptual model, defining physical and abstract objects in an area of interest to the project. It can be used to document relationships between and responsibilities of conceptual classes (classes that represent the concept of a group of things rather than classes that define a programming object). It is also useful for defining the terms of a domain. It is in essence a representation of the most important and enduring concepts that describe the context, structure and operation of a business.",
+      "mcq": {
+        "options": [
+          "A high-level conceptual model defining physical and abstract objects in an area of interest, documenting relationships and responsibilities of conceptual classes, and defining the terms of a domain",
+          "A physical database schema with primary and foreign keys",
+          "A UML sequence diagram of the main business process",
+          "A deployment diagram showing servers and network nodes"
+        ],
+        "answer": 0
+      },
+      "tip": "Key distinction: conceptual classes describe concepts, not programming objects."
+    },
+    {
+      "id": "w2-26",
+      "topic": "OOP summary",
+      "marks": 5,
+      "q": "Define the five terms in the OOP summary: Object, Class, Encapsulation, Polymorphism, Inheritance.",
+      "a": "Object - a concrete entity with state and behaviour.\nClass - a blueprint/type used to create objects.\nEncapsulation - control access to internal state.\nPolymorphism - common interface, different behaviour.\nInheritance - derive a new type from an existing type.\nOOP itself is a programming paradigm in which software is organised around objects that combine state (data) and behaviour (operations). Key idea: the object owns its data and provides operations that make sense for that data.",
+      "mcq": {
+        "options": [
+          "Object = concrete entity with state + behaviour; Class = blueprint/type used to create objects; Encapsulation = control access to internal state; Polymorphism = common interface, different behaviour; Inheritance = derive a new type from an existing type",
+          "Object = a blueprint; Class = a concrete entity; Encapsulation = inheritance; Polymorphism = one implementation; Inheritance = data hiding",
+          "Object = a method; Class = a property; Encapsulation = a package; Polymorphism = many constructors; Inheritance = copying a class",
+          "Object = a database row; Class = a table; Encapsulation = a foreign key; Polymorphism = a stored procedure; Inheritance = a view"
+        ],
+        "answer": 0
+      },
+      "tip": "Five one-line definitions. If the question says 'define', do not write a paragraph each."
+    }
+  ]
+}

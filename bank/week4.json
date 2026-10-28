@@ -1,0 +1,521 @@
+{
+  "week": 4,
+  "title": "UML Use Case and Sequence Diagrams",
+  "questions": [
+    {
+      "id": "w4-01",
+      "topic": "Use case purpose",
+      "marks": 4,
+      "q": "What is a Use Case Diagram and what does it show? What does it NOT show?",
+      "a": "A use case is a description of a set of sequences of actions, including variants, that a subject performs to yield an observable result of value to an actor. A Use Case Diagram = what the system does and who interacts with it. It provides a high-level view of the functional requirements. It does NOT show detailed implementation.",
+      "mcq": {
+        "options": [
+          "It shows what the system does and who interacts with it, giving a high-level view of the functional requirements — it does not show detailed implementation",
+          "It shows the exact classes and attributes needed for implementation",
+          "It shows the order in which objects exchange messages at runtime",
+          "It shows the deployment of components across servers"
+        ],
+        "answer": 0
+      },
+      "tip": "Use the official definition, then the plain-English version, then the 'no implementation detail' caveat."
+    },
+    {
+      "id": "w4-02",
+      "topic": "Use case elements",
+      "marks": 4,
+      "q": "What are the four main elements of a Use Case Diagram?",
+      "a": "1. Actor\n2. Use Case\n3. System Boundary\n4. Relationships",
+      "mcq": {
+        "options": [
+          "Actor, Use Case, System Boundary, Relationships",
+          "Actor, Class, Message, Lifeline",
+          "Actor, Use Case, Lifeline, Activation",
+          "Use Case, System Boundary, Package, Note"
+        ],
+        "answer": 0
+      },
+      "tip": "One mark each - do not forget System Boundary."
+    },
+    {
+      "id": "w4-03",
+      "topic": "Actor",
+      "marks": 4,
+      "q": "What is an actor? What can an actor be? Where is it positioned?",
+      "a": "An actor is an external entity that interacts with the system. An actor can be a person, another system, an organization, or an external device. Examples: Customer, Student, Administrator, Bank, Payment Gateway, Delivery Service. An actor is outside the system boundary.",
+      "mcq": {
+        "options": [
+          "An external entity interacting with the system — a person, another system, an organisation or an external device — always outside the system boundary",
+          "A class inside the system that performs the work",
+          "A use case triggered automatically by the system",
+          "A database table that stores user accounts"
+        ],
+        "answer": 0
+      },
+      "tip": "The 'outside the system boundary' point is frequently marked."
+    },
+    {
+      "id": "w4-04",
+      "topic": "Use case",
+      "marks": 3,
+      "q": "What is a use case and how is it represented? Give four examples.",
+      "a": "A use case represents a function or service that the system provides to an actor. It is normally represented using an oval. Examples: Register Account, Login, Search Product, Add to Cart, Checkout, Make Payment, Generate Report.",
+      "mcq": {
+        "options": [
+          "A function or service the system provides to an actor, normally drawn as an oval — e.g. Register Account, Login, Make Payment",
+          "A screen or page in the user interface",
+          "A class that coordinates the UI and the database",
+          "A message sent between two lifelines"
+        ],
+        "answer": 0
+      },
+      "tip": "Oval shape - one mark."
+    },
+    {
+      "id": "w4-05",
+      "topic": "Naming use cases",
+      "marks": 4,
+      "q": "How should use cases be named? Give three good and three less appropriate names, and explain why.",
+      "a": "Use case names should normally describe an action or goal.\nGood: Login, Register Account, Search Product, Make Payment, Generate Report.\nLess appropriate: Login Page, Payment Screen, Shopping Cart, Database.\nA use case describes what the actor wants to accomplish, rather than a screen or a database.",
+      "mcq": {
+        "options": [
+          "Names should describe an action or goal — Login, Search Product, Generate Report — rather than a screen or database such as Login Page or Database",
+          "Names should describe the screen the user sees, e.g. Payment Screen",
+          "Names should be nouns, e.g. Shopping Cart, Database",
+          "Names should match the class names exactly"
+        ],
+        "answer": 0
+      },
+      "tip": "The rule: verb/goal, not noun/screen. 'Shopping Cart' and 'Database' are structural, not goals."
+    },
+    {
+      "id": "w4-06",
+      "topic": "System boundary",
+      "marks": 2,
+      "q": "What is the purpose of the system boundary?",
+      "a": "The system boundary shows what is inside and outside the system. It helps answer: what functionality belongs to our system?",
+      "mcq": {
+        "options": [
+          "It shows what is inside and outside the system, helping answer what functionality belongs to our system",
+          "It defines the network perimeter for security",
+          "It shows the database schema boundary",
+          "It lists the non-functional requirements"
+        ],
+        "answer": 0
+      },
+      "tip": "Two marks: (1) inside/outside, (2) scoping functionality."
+    },
+    {
+      "id": "w4-07",
+      "topic": "Use case relationships",
+      "marks": 5,
+      "q": "Which relationships are allowed in a Use Case Diagram and between which elements?",
+      "a": "Association - between Actor and Use Case; NOT between Use Cases.\nGeneralization - between Actors; and between Use Cases.\nDependency - between Use Cases; <<include>> and <<extend>>.",
+      "mcq": {
+        "options": [
+          "Association between Actor and Use Case (NOT between use cases); Generalization between actors and between use cases; Dependency between use cases (include/extend)",
+          "Association between use cases; Generalization between actors only",
+          "Composition between use cases; Aggregation between actors",
+          "Only association is permitted in a use case diagram"
+        ],
+        "answer": 0
+      },
+      "tip": "The trap is 'Association between use cases' - that is wrong. Association is actor-to-use-case only."
+    },
+    {
+      "id": "w4-08",
+      "topic": "Include vs extend",
+      "marks": 8,
+      "q": "Compare <<include>> and <<extend>> across required/optional, common/extra behaviour, dependency of the base use case, arrow direction, and mnemonic.",
+      "a": "<<include>> - Required behaviour; reuses common behaviour; the base use case NEEDS it; the arrow points TO the included use case; 'Must do'.\n<<extend>> - Optional/conditional behaviour; adds extra behaviour; the base use case can occur WITHOUT it; the arrow points TO the base use case; 'May do'.",
+      "mcq": {
+        "options": [
+          "include: required, reuses common behaviour, base needs it, arrow points TO the included use case, 'must do'. extend: optional/conditional, adds extra behaviour, base can occur without it, arrow points TO the base, 'may do'",
+          "include: optional; extend: required",
+          "include: arrow points to the base; extend: arrow points to the extending use case",
+          "include and extend are synonyms"
+        ],
+        "answer": 0
+      },
+      "tip": "Direction is the classic mistake: include points at the included (shared) use case; extend points back at the base."
+    },
+    {
+      "id": "w4-09",
+      "topic": "Include example",
+      "marks": 4,
+      "q": "Give an example of <<include>> and explain the correct arrow direction.",
+      "a": "When a customer checks out, the system must Scan Item, Calculate Total and Tax, and process Payment - so Checkout always requires these.\nCorrect: Checkout ----<<include>>----> Calculate Total.\nNOT: Calculate Total ----<<include>>----> Checkout.\nThe arrow points towards the included use case.",
+      "mcq": {
+        "options": [
+          "Checkout always requires Calculate Total, so Checkout —include—> Calculate Total (arrow points at the included use case)",
+          "Calculate Total —include—> Checkout",
+          "Checkout —include—> Checkout",
+          "Checkout and Calculate Total are connected by a plain association"
+        ],
+        "answer": 0
+      },
+      "tip": "Say 'always requires' - that is what makes it include rather than extend."
+    },
+    {
+      "id": "w4-10",
+      "topic": "Extend example",
+      "marks": 4,
+      "q": "Give an example of <<extend>> and explain when it applies.",
+      "a": "<<extend>> is used when additional behaviour occurs under certain conditions. Example: a customer checks out. Normally the flow is just Checkout. But if the customer has a valid coupon, Apply Discount can occur - so Apply Discount ----<<extend>>----> Checkout. The arrow points towards the base use case.",
+      "mcq": {
+        "options": [
+          "If the customer has a valid coupon, Apply Discount can occur — Apply Discount —extend—> Checkout (arrow points at the base use case)",
+          "Checkout —extend—> Apply Discount",
+          "Apply Discount is an association of the Customer actor",
+          "Apply Discount always happens, so it is an include"
+        ],
+        "answer": 0
+      },
+      "tip": "Keyword: 'if' / 'under certain conditions' / 'valid coupon'."
+    },
+    {
+      "id": "w4-11",
+      "topic": "Actor generalization",
+      "marks": 4,
+      "q": "Explain actor generalization and why it is used.",
+      "a": "Sometimes actors have common behaviour. Example: User is generalised by Customer and Administrator - both are types of User. If User can Login and Logout, both Customer and Admin inherit these interactions.\nWithout generalization you would repeat the association: Customer -> Login, Admin -> Login, Staff -> Login, Manager -> Login. With generalization the common behaviour can be associated once with the generalized actor, removing repeated associations.",
+      "mcq": {
+        "options": [
+          "Common behaviour is associated with a generalised actor (User), so Customer/Admin/Staff/Manager inherit Login and Logout instead of repeating four associations",
+          "It allows one actor to be used by several systems",
+          "It replaces the need for a system boundary",
+          "It converts actors into use cases"
+        ],
+        "answer": 0
+      },
+      "tip": "Benefit = removes repeated associations."
+    },
+    {
+      "id": "w4-12",
+      "topic": "Requirements modelling",
+      "marks": 6,
+      "q": "Describe the process of modelling the requirements of a system with use cases.",
+      "a": "1. Establish the context of the system by identifying the actors that surround it.\n2. For each actor, consider the behaviour that each expects or requires the system to provide.\n3. Name these common behaviours as use cases.\n4. Factor common behaviour into new use cases that are used by others; factor variant behaviour into new use cases that extend more main-line flows.\n5. Model these use cases, actors and their relationships in a use case diagram.\n6. Enhance these use cases with notes or constraints that assert non-functional requirements; you may have to attach some of these to the whole system.",
+      "mcq": {
+        "options": [
+          "Establish context by identifying actors; consider each actor's expected behaviour; name those behaviours as use cases; factor common behaviour into included use cases and variant behaviour into extending use cases; model them in a diagram; enhance with notes/constraints for non-functional requirements",
+          "Start by drawing classes, then derive actors from them",
+          "Start by writing the database schema",
+          "Start by writing sequence diagrams, then derive use cases"
+        ],
+        "answer": 0
+      },
+      "tip": "Six steps - step 4 is where include/extend come from."
+    },
+    {
+      "id": "w4-13",
+      "topic": "Hotel scenario",
+      "marks": 8,
+      "q": "Hotel Management System: guests rent rooms with a receptionist's assistance, guests book rooms for future stays (the system checks whether the room is already booked), guests pay on check-out by cash, cheque or credit card, and the receptionist must log in with username/password verification. Identify the actors, the use cases and the relationships.",
+      "a": "Actors: Guest, Receptionist. (System boundary: Hotel Management System.)\nUse cases: 1. Log in (Receptionist, requires Username/Password Verification). 2. Rent Room (Guest, assisted by Receptionist). 3. Book Room (Guest -> Receptionist -> system checks prior booking). 4. Check Availability (before booking). 5. Check Out (Guest). 6. Make Payment (Guest selects one of Pay by Cash, Pay by Cheque, Pay by Credit Card).\nRelationships:\n- Receptionist -> Log in, with <<include>> Username/Password Verification.\n- Guest -> Rent Room (assisted by Receptionist).\n- Book Room -> <<include>> Check Availability.\n- Check Out -> <<include>> Make Payment.\n- Make Payment -> generalised into three alternate methods (Cash / Cheque / Credit Card).",
+      "mcq": {
+        "options": [
+          "Receptionist to Log in with include of Username/Password Verification; Book Room includes Check Availability; Check Out includes Make Payment; Make Payment generalised into Cash/Cheque/Credit Card",
+          "Log in includes Receptionist; Check Availability includes Book Room",
+          "Guest to Rent Room with extend; Make Payment is an association class",
+          "Check Out extends Make Payment because payment is optional"
+        ],
+        "answer": 0,
+        "stem": "In the Hotel Management System scenario, which relationships are correct?"
+      },
+      "tip": "'Check Availability' is an INCLUDE of Book Room (mandatory); the three payment methods are GENERALIZATIONS of Make Payment."
+    },
+    {
+      "id": "w4-14",
+      "topic": "Hospital scenario",
+      "marks": 8,
+      "q": "Hospital Management System: the receptionist logs in securely, then adds/edits/deletes/views appointment details; new patients create their own accounts online, update personal information and manage upcoming appointments; the receptionist can manage patient accounts; on successful scheduling the system automatically sends a confirmation message with date and time; all users must log in and log out. Identify actors, use cases and relationships.",
+      "a": "Actors: Receptionist, Patient. (System boundary: Hospital Management System.)\nUse cases: Log in; Log out; Add Appointment; Edit Appointment; Delete Appointment; View Appointment; Create Account (online, self-service); Update Personal Information; Manage Appointments; Manage Patient Accounts (receptionist); Send Appointment Confirmation (system-triggered).\nRelationships:\n- Receptionist -> Log in (<<include>> Username/Password Verification), Log out, Add/Edit/Delete/View Appointment, Manage Patient Accounts.\n- Patient -> Create Account, Update Personal Information, Manage Appointments, Log in, Log out.\n- Add/Edit/Delete/View Appointment -> <<include>> Log in (authentication is mandatory before access).\n- Schedule Appointment -> <<include>> Send Appointment Confirmation (the system always sends it after successful scheduling).",
+      "mcq": {
+        "options": [
+          "Log in (mandatory before accessing protected functions) and Send Appointment Confirmation (always sent after successful scheduling)",
+          "Send Appointment Confirmation is an extend because it might fail",
+          "Log out is an include of Log in",
+          "Manage Patient Accounts is an include of Create Account"
+        ],
+        "answer": 0,
+        "stem": "Which is modelled as include in the Hospital Management System scenario?"
+      },
+      "tip": "Watch the wording: 'all users are required to log in' makes Log in an <<include>>; 'automatically sends a confirmation' makes it an <<include>> of scheduling."
+    },
+    {
+      "id": "w4-15",
+      "topic": "Sequence diagram",
+      "marks": 5,
+      "q": "What is a UML Sequence Diagram? What does it show and how is it read?",
+      "a": "A Sequence Diagram is a UML interaction diagram that shows: the participants involved in an interaction; the messages exchanged between participants; the order in which messages occur; the flow of an operation or scenario over time. The diagram is read from top to bottom, because time progresses downward.",
+      "mcq": {
+        "options": [
+          "A UML interaction diagram showing participants, the messages exchanged, their order, and the flow of a scenario over time; read top to bottom because time progresses downward",
+          "A diagram showing the static class structure and relationships",
+          "A diagram showing system states and the transitions between them",
+          "A diagram showing which actors can perform which functions"
+        ],
+        "answer": 0
+      },
+      "tip": "It answers: WHO does WHAT to WHOM and in WHAT ORDER."
+    },
+    {
+      "id": "w4-16",
+      "topic": "Sequence elements",
+      "marks": 7,
+      "q": "Give the seven main elements of a sequence diagram and the purpose of each.",
+      "a": "Actor - external user/system interacting with the system.\nObject - participant inside the system.\nLifeline - shows the existence of a participant over time.\nActivation - shows when an object is performing an operation.\nMessage - communication between participants.\nReturn message - response returned from an operation.\nCombined fragment - represents conditions or repetition.",
+      "mcq": {
+        "options": [
+          "Actor, Object, Lifeline, Activation, Message, Return message, Combined fragment",
+          "Actor, Class, Association, Attribute, Operation, Note, Package",
+          "Lifeline, Activation, Message, State, Transition, Event, Guard",
+          "Actor, Use Case, Boundary, Relationship, Note, Package, Constraint"
+        ],
+        "answer": 0
+      },
+      "tip": "Seven rows - actor, object, lifeline, activation, message, return, combined fragment."
+    },
+    {
+      "id": "w4-17",
+      "topic": "Lifelines",
+      "marks": 5,
+      "q": "Explain lifelines, including creation and deletion notation.",
+      "a": "A lifeline represents a participant in the interaction; the vertical dashed line represents the participant's existence during the interaction. Objects are shown as squares with the object type, optionally preceded by 'name :' - write the object's name if it clarifies the diagram.\nCreation: an arrow with 'new' written above it - an object created after the start of the scenario appears lower than the others.\nDeletion: an X at the bottom of the object's lifeline.",
+      "mcq": {
+        "options": [
+          "The vertical dashed line represents a participant's existence; creation is an arrow labelled 'new' (the object appears lower on the diagram); deletion is an X at the bottom of the lifeline",
+          "Creation is an X; deletion is an arrow labelled 'new'",
+          "Lifelines are solid lines that never end",
+          "Lifelines are horizontal lines representing time"
+        ],
+        "answer": 0
+      },
+      "tip": "Remember: a created object appears LOWER on the diagram; deletion is an X."
+    },
+    {
+      "id": "w4-18",
+      "topic": "Activation",
+      "marks": 4,
+      "q": "What does an activation bar represent?",
+      "a": "An activation bar represents the period when an object is performing an operation. It indicates 'the object is currently processing something'. It is a thick box over the object's lifeline, drawn when the object's method is on the stack - either that object is running its code, or it is on the stack waiting for another object's method to finish. Activations can be nested to indicate recursion.",
+      "mcq": {
+        "options": [
+          "A thick box over the lifeline showing the period when an object is performing an operation — 'the object is currently processing something'; activations can nest to indicate recursion",
+          "A dashed arrow representing a response",
+          "A rectangle representing a conditional branch",
+          "A vertical dashed line showing existence over time"
+        ],
+        "answer": 0
+      },
+      "tip": "Phrase to quote: 'the object is currently processing something'."
+    },
+    {
+      "id": "w4-19",
+      "topic": "Messages",
+      "marks": 5,
+      "q": "Explain messages and return messages. What can a message represent?",
+      "a": "A message represents communication between two participants; the arrow shows the direction of communication. Write the message name and arguments above the arrow. The message can represent: a method call, a request, a signal, or communication.\nA return message represents a response, and is normally shown using a dashed arrow. However, not every return needs to be explicitly shown.",
+      "mcq": {
+        "options": [
+          "A message represents communication; the name and arguments go above the arrow; it can be a method call, request, signal or communication. A return message is a response drawn as a dashed arrow, and not every return needs to be shown",
+          "A message is always a method call and is drawn as a dashed arrow",
+          "Messages are drawn below the arrow and have no arguments",
+          "Every message must have an explicit return message"
+        ],
+        "answer": 0
+      },
+      "tip": "Four things a message can be: method call, request, signal, communication."
+    },
+    {
+      "id": "w4-20",
+      "topic": "Sync vs async",
+      "marks": 4,
+      "q": "Compare synchronous and asynchronous messages.",
+      "a": "Synchronous: the sender waits for the receiver to complete the operation. Example: the LoginSystem waits for the result.\nAsynchronous: the sender does not need to wait for the receiver to finish. Example: the OrderSystem can continue processing.",
+      "mcq": {
+        "options": [
+          "Synchronous: the sender waits for the receiver to complete. Asynchronous: the sender does not need to wait",
+          "Synchronous: the sender does not wait. Asynchronous: the sender waits",
+          "Both require the sender to wait for a response",
+          "Synchronous messages are always drawn dashed"
+        ],
+        "answer": 0
+      },
+      "tip": "One word each: 'waits' vs 'does not wait'."
+    },
+    {
+      "id": "w4-21",
+      "topic": "Combined fragments",
+      "marks": 6,
+      "q": "Explain the alt, opt and loop combined fragments with an example of each.",
+      "a": "alt = alternative paths (conditional behaviour). Real systems contain decisions. Example: if payment is successful, create the order; otherwise display a payment failure message. (Similar to if/else.)\nopt = an optional interaction. Example: if the customer has a discount coupon, apply discount.\nloop = repeated interaction. Example: a customer adds several products to the shopping cart.",
+      "mcq": {
+        "options": [
+          "alt = alternative paths (if/else); opt = optional interaction (if only); loop = repeated interaction",
+          "alt = loop; opt = alternative; loop = optional",
+          "alt = optional; opt = alternative; loop = synchronous",
+          "Fragments are only used in use case diagrams"
+        ],
+        "answer": 0
+      },
+      "tip": "alt = if/else, opt = if-only, loop = repeat. All three are 'combined fragments'."
+    },
+    {
+      "id": "w4-22",
+      "topic": "Login sequence",
+      "marks": 6,
+      "q": "Model the login scenario: a student enters a username and password. The Login System sends the credentials to the Authentication Service. The Authentication Service checks the credentials and returns the result. The Login System displays the result to the student.",
+      "a": "The sequence is:\n1. Student enters username/password\n2. Student requests login\n3. LoginSystem sends credentials\n4. AuthenticationService validates credentials\n5. AuthenticationService returns result\n6. LoginSystem displays result\nThe diagram describes: WHO -> does WHAT -> to WHOM -> and in WHAT ORDER.",
+      "mcq": {
+        "options": [
+          "Student enters credentials, Student requests login, LoginSystem sends credentials, AuthenticationService validates, returns result, LoginSystem displays result",
+          "LoginSystem sends credentials, Student enters credentials, AuthenticationService validates",
+          "AuthenticationService validates, Student enters credentials, LoginSystem displays result",
+          "Student enters credentials, AuthenticationService displays result, LoginSystem validates"
+        ],
+        "answer": 0,
+        "stem": "Student enters username/password; the Login System sends credentials to the Authentication Service; it checks and returns the result; the Login System displays the result. What is the correct order?"
+      },
+      "tip": "Number the steps - markers look for the correct ORDER."
+    },
+    {
+      "id": "w4-23",
+      "topic": "Use case vs sequence",
+      "marks": 8,
+      "q": "Compare a Use Case Diagram and a Sequence Diagram.",
+      "a": "Use Case Diagram - focuses on the system from the user's perspective; answers 'what does the system do and who interacts with it?'; identifies actors, system functions (use cases) and the relationships between actors and use cases.\nSequence Diagram - focuses on the interaction between system participants; answers 'how does a use case happen, and in what order do objects communicate?'; identifies participants, messages, the order of interactions and responses.",
+      "mcq": {
+        "options": [
+          "Use Case: the system from the user's perspective — what it does and who interacts; actors, use cases, relationships. Sequence: the interaction between participants — how and in what order; participants, messages, order, responses",
+          "Use Case: how objects interact; Sequence: what the system does",
+          "Both diagrams show the same information in different notation",
+          "Use Case diagrams show ordering; Sequence diagrams do not"
+        ],
+        "answer": 0
+      },
+      "tip": "Use Case = WHAT and WHO. Sequence = HOW and in WHAT ORDER."
+    },
+    {
+      "id": "w4-24",
+      "topic": "Why not just code",
+      "marks": 5,
+      "q": "Sequence diagrams can be close to code level - so why not just code the algorithm instead?",
+      "a": "Because: a good sequence diagram is still a bit above the level of the real code (not all code is drawn on the diagram); sequence diagrams are language-agnostic (can be implemented in many different languages); non-coders can do sequence diagrams; it is easier to do sequence diagrams as a team; and you can see many objects/classes at a time on the same page (visual bandwidth).",
+      "mcq": {
+        "options": [
+          "It stays above real code level; it is language-agnostic; non-coders can do it; it is easier to do as a team; and you see many objects at once (visual bandwidth)",
+          "Because sequence diagrams execute faster than code",
+          "Because code cannot express the ordering of messages",
+          "Because sequence diagrams are required by the compiler"
+        ],
+        "answer": 0
+      },
+      "tip": "Five reasons - learn all five."
+    },
+    {
+      "id": "w4-25",
+      "topic": "UML diagram connection",
+      "marks": 3,
+      "q": "Explain the connection between Use Case, Class and Sequence diagrams.",
+      "a": "Use Case -> WHAT does the system do?\nClass Diagram -> WHAT objects/classes are needed?\nSequence Diagram -> HOW do the objects interact?",
+      "mcq": {
+        "options": [
+          "Use Case answers WHAT does the system do? Class Diagram answers WHAT objects are needed? Sequence Diagram answers HOW do the objects interact?",
+          "Use Case answers HOW; Class answers WHAT; Sequence answers WHO",
+          "Use Case answers WHAT; Class answers HOW; Sequence answers WHEN",
+          "All three answer the same question at different levels of detail"
+        ],
+        "answer": 0
+      },
+      "tip": "Three lines: WHAT, WHAT, HOW."
+    },
+    {
+      "id": "w4-26",
+      "topic": "CRUD sequence",
+      "marks": 8,
+      "q": "For the Student Management System (SMS) CRUD exercise: name the four lifelines used, and give the message sequence for creating a student record.",
+      "a": "Lifelines: User (Actor), StudentUI (Boundary), StudentController (Control), StudentDB (Entity/Database).\nCreate Student operation:\n1. User -> StudentUI: enterStudentDetails()\n2. StudentUI -> StudentController: createStudent(data)\n3. StudentController -> StudentDB: insert(data)\n4. StudentDB -> StudentController: result(success, newId)\n5. alt [success] StudentController -> StudentUI: showConfirmation(newId) / [else] StudentController -> StudentUI: showError(...)\nThen StudentUI -> User: displayResult().",
+      "mcq": {
+        "options": [
+          "User (Actor), StudentUI (Boundary), StudentController (Control), StudentDB (Entity); enterStudentDetails(), createStudent(data), insert(data)",
+          "User, StudentUI, StudentDB, StudentController; insert(data), createStudent(data), enterStudentDetails()",
+          "Registrar, Database, Controller, Screen; search(studentId), getStudent(), findById()",
+          "User, StudentController, StudentUI, StudentDB; createStudent(data), enterStudentDetails(), insert(data)"
+        ],
+        "answer": 0,
+        "stem": "In the SMS CRUD exercise, what are the four lifelines and the first three messages of Create Student?"
+      },
+      "tip": "Memorise the four lifeline stereotypes: Actor, Boundary, Control, Entity - they are reused in every sequence exercise."
+    },
+    {
+      "id": "w4-27",
+      "topic": "CRUD sequence",
+      "marks": 6,
+      "q": "Give the message sequence for the Delete Student operation in the SMS exercise, including the confirmation step.",
+      "a": "1. User -> StudentUI: delete(studentId)\n2. StudentUI -> StudentController: deleteStudent(studentId)\n3. opt (confirmation) StudentController -> StudentUI: confirm(\"Are you sure?\") -> User confirms\n4. StudentController -> StudentDB: deleteById(studentId)\n5. StudentDB -> StudentController: deleteResult(rowsAffected)\n6. alt [rowsAffected = 1] StudentController -> StudentUI: showConfirmation() / [else] StudentController -> StudentUI: showError(\"Not found / constraint\")\n7. StudentUI -> User: displayResult()",
+      "mcq": {
+        "options": [
+          "opt for the optional confirmation ('Are you sure?'), and alt for the success/failure outcome based on rowsAffected",
+          "alt for the confirmation, opt for the outcome",
+          "loop for the confirmation, alt for the outcome",
+          "No fragments are needed for delete"
+        ],
+        "answer": 0,
+        "stem": "In Delete Student, which fragments are used for the confirmation and the outcome?"
+      },
+      "tip": "Note the opt for confirmation (optional) and the alt for success/failure (conditional) - using the right fragment earns marks."
+    },
+    {
+      "id": "w4-28",
+      "topic": "EA sequence practical",
+      "marks": 5,
+      "q": "In Enterprise Architect, how do you create a sequence diagram package and add lifelines?",
+      "a": "1. Create a New Project and click CANCEL on the Model Wizard.\n2. Double-click Model and rename it (e.g. SMS).\n3. Right-click the Model root > New Package > name it (e.g. Create Student) > Package Only in Initial Content > OK.\n4. Right-click the package > Add Diagram > select UML Behaviour on the left pane and Sequence on the right pane > OK.\n5. Drag lifelines onto the canvas and name them: User (Actor), StudentUI (Boundary), StudentController (Control), StudentDB (Entity/Database).\n6. Add messages between lifelines in order, and use alt / opt fragments for conditions.",
+      "mcq": {
+        "options": [
+          "New Project, CANCEL the Model Wizard, rename Model (e.g. SMS), New Package per scenario, Add Diagram, UML Behaviour, Sequence, then drag lifelines and add messages",
+          "New Project, accept the Model Wizard defaults, Add Diagram, Class",
+          "File, Import, Sequence Diagram",
+          "Right-click the project root, Code Engineering, Generate Source Code"
+        ],
+        "answer": 0
+      },
+      "tip": "Package per scenario: Create Student, Read Student, Update Student, Delete Student - all inside the same project/model."
+    },
+    {
+      "id": "w4-29",
+      "topic": "Multiple actors",
+      "marks": 3,
+      "q": "Explain what is meant by 'a use case can have multiple actors', using the payment example from the lecture.",
+      "a": "A use case can have multiple actors. In the payment example the Customer initiates the payment, while the Payment Service participates in processing it. So one use case (Make Payment) has two actors with different roles: the Customer starts it, and the external Payment Service takes part in completing it.",
+      "mcq": {
+        "options": [
+          "One use case can be connected to several actors - e.g. the Customer initiates the payment while the Payment Service participates in processing it",
+          "Each use case may only ever have exactly one actor",
+          "An actor may only be connected to one use case in the whole diagram",
+          "Multiple actors means the same actor drawn several times"
+        ],
+        "answer": 0
+      },
+      "tip": "The key phrase is 'one use case, two actors with different roles'. An actor does not have to be the one who starts the use case."
+    },
+    {
+      "id": "w4-30",
+      "topic": "One actor, multiple use cases",
+      "marks": 3,
+      "q": "Explain what is meant by 'one actor, multiple use cases'.",
+      "a": "A single actor can perform many functions in the system. For example a Customer may Register, Login, Search Product, Add to Cart, Checkout, Make Payment and Track Order. Each of those is a separate use case, but they are all associated with the same Customer actor - so one actor has many association lines, one to each use case.",
+      "mcq": {
+        "options": [
+          "A single actor can be associated with many use cases - e.g. a Customer can Register, Login, Search Product, Add to Cart, Checkout and Make Payment",
+          "An actor can only be associated with one use case, otherwise the diagram is invalid",
+          "It means the actor must be generalised into several sub-actors",
+          "It means the use cases must be merged into one"
+        ],
+        "answer": 0
+      },
+      "tip": "Contrast with the previous idea: one actor -> many use cases, and one use case -> many actors. Both are normal."
+    }
+  ]
+}

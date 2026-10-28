@@ -1,0 +1,288 @@
+{
+  "week": 1,
+  "title": "From Programming Approaches to Object-Oriented Design",
+  "questions": [
+    {
+      "id": "w1-01",
+      "topic": "Programming approaches",
+      "marks": 2,
+      "q": "What is a programming approach, and why does the choice of approach matter?",
+      "a": "A programming approach (paradigm) is a way of thinking about and organising a solution. The same problem can be solved using different paradigms. The choice affects readability, maintainability, reuse and scalability. The key question is: how do we organise software as systems become larger?",
+      "mcq": {
+        "options": [
+          "A way of thinking about and organising a solution; the choice affects readability, maintainability, reuse and scalability",
+          "A specific programming language syntax; it determines which libraries are available",
+          "A set of design patterns that must be applied to every project",
+          "The order in which a program's statements are executed at runtime"
+        ],
+        "answer": 0
+      },
+      "tip": "Answer in two parts: (1) what it is, (2) the four consequences - readability, maintainability, reuse, scalability."
+    },
+    {
+      "id": "w1-02",
+      "topic": "Programming approaches",
+      "marks": 5,
+      "q": "Name the five programming approaches and state what each organises around.",
+      "a": "1. Procedural - organises around procedures/functions.\n2. Object-Oriented - organises around objects + responsibilities.\n3. Functional - organises around functions + transformations.\n4. Logic - organises around facts, rules and relationships.\n5. Event-Driven - organises around events + handlers.",
+      "mcq": {
+        "options": [
+          "Procedural, Object-Oriented, Functional, Logic, Event-Driven",
+          "Procedural, Object-Oriented, Functional, Logic, Declarative",
+          "Procedural, Structural, Functional, Logic, Event-Driven",
+          "Object-Oriented, Functional, Imperative, Logic, Event-Driven"
+        ],
+        "answer": 0
+      },
+      "tip": "Memorise as P-O-F-L-E. One line each is enough for full marks."
+    },
+    {
+      "id": "w1-03",
+      "topic": "Procedural programming",
+      "marks": 4,
+      "q": "Describe procedural programming. Give two advantages and two limitations.",
+      "a": "Main focus: what steps should the computer perform? A problem is decomposed into procedures or functions. State/data is often passed between or shared by procedures. It is natural for algorithms and small, well-defined tasks. Languages: Basic, C, Pascal.\nAdvantages: clear for small step-by-step problems; functions can be tested and reused; often easy for beginners.\nLimitations: shared data can become scattered; large systems can create complex dependencies; changes to data structures may affect many functions.",
+      "mcq": {
+        "options": [
+          "Focus: what steps the computer should perform. Limitations: shared data can become scattered, and changes to data structures may affect many functions",
+          "Focus: what transformations to apply to data. Limitations: immutable data is hard to model",
+          "Focus: what facts and rules are true. Limitations: poor at expressing relationships",
+          "Focus: what should happen when an event occurs. Limitations: event chains are hard to trace"
+        ],
+        "answer": 0,
+        "stem": "Procedural programming: what is its main focus, and which limitations are listed?"
+      },
+      "tip": "Example to quote: ATM withdrawal = read card, verify PIN, check balance, enter amount, deduct, dispense cash."
+    },
+    {
+      "id": "w1-04",
+      "topic": "Functional programming",
+      "marks": 3,
+      "q": "Describe functional programming and give its advantages and limitations.",
+      "a": "Main focus: what transformations should be applied to data? Functions are the primary building blocks; it emphasises immutable data and minimising side effects; functions can be composed into larger operations. Languages: Haskell, F#.\nAdvantages: good for data processing and transformations; pure functions can be composed.\nLimitations: can be less intuitive for entity-rich business domains.",
+      "mcq": {
+        "options": [
+          "Main focus: what transformations should be applied to data; emphasises immutable data and minimising side effects. Languages: Haskell, F#",
+          "Main focus: what steps to perform in sequence. Languages: C, Pascal",
+          "Main focus: entities and their responsibilities. Languages: C#, Java",
+          "Main focus: facts and inference rules. Languages: Prolog"
+        ],
+        "answer": 0
+      },
+      "tip": "Example to quote: student marks -> calculateTotal() -> calculateAverage() -> calculateGrade() -> Result."
+    },
+    {
+      "id": "w1-05",
+      "topic": "Logic and event-driven",
+      "marks": 4,
+      "q": "Describe logical programming and event-driven programming, with one advantage and one limitation of each.",
+      "a": "Logical programming organises around facts, rules and relationships, and supports reasoning and inference. Advantages: expressive for relationships, constraints and rules; natural for expert/rule-based systems. Limitations: less common for general commercial application development; not always natural for systems dominated by changing object state.\nEvent-driven programming organises around events and handlers; the flow is triggered by events rather than one fixed sequence. Common in GUIs, web applications and games. Limitation: event chains can become difficult to trace.",
+      "mcq": {
+        "options": [
+          "Logic organises around facts, rules and relationships; Event-Driven organises around events and handlers",
+          "Logic organises around events and handlers; Event-Driven organises around facts and rules",
+          "Logic organises around functions and transformations; Event-Driven organises around procedures",
+          "Logic organises around objects; Event-Driven organises around data transformations"
+        ],
+        "answer": 0,
+        "stem": "Which pairing of approach to description is correct?"
+      },
+      "tip": "Logic example: Programming 1 is a prerequisite of Programming 2 - can John enrol?"
+    },
+    {
+      "id": "w1-06",
+      "topic": "Comparing approaches",
+      "marks": 5,
+      "q": "Complete the 'key question' for each approach: Procedural, Functional, Logical, Object-Oriented, Event-Driven.",
+      "a": "Procedural -> What steps should I perform?\nFunctional -> What transformation should I apply?\nLogical -> What facts and rules are true?\nObject-Oriented -> What objects exist and how do they interact?\nEvent-Driven -> What should happen when an event occurs?",
+      "mcq": {
+        "options": [
+          "Procedural: What steps should I perform? Functional: What transformation should I apply? OO: What objects exist and how do they interact?",
+          "Procedural: What objects exist? Functional: What steps should I perform? OO: What transformation should I apply?",
+          "Procedural: What facts and rules are true? Functional: What objects exist? OO: What events occur?",
+          "Procedural: What should happen when an event occurs? Functional: What steps should I perform? OO: What facts are true?"
+        ],
+        "answer": 0,
+        "stem": "Which mapping of approach to key question is correct?"
+      },
+      "tip": "This is a very common short-answer / matching question. Learn verbatim."
+    },
+    {
+      "id": "w1-07",
+      "topic": "Comparing approaches",
+      "marks": 4,
+      "q": "Choose a primary approach for each scenario and give one reason: (A) a tiny temperature converter, (B) an online banking system with customers, accounts, payments, cards and transactions, (C) a pipeline that resizes, filters and classifies millions of images, (D) a mobile game with player input, collisions, enemies, score and UI events.",
+      "a": "A - Procedural: small, sequential, step-by-step algorithmic task with a clear input-process-output flow.\nB - Object-Oriented: many real-world entities with state, relationships and responsibilities that must be maintained and extended.\nC - Functional: pure data transformations applied in a pipeline; functions compose well and avoid side effects.\nD - Event-Driven: the flow is triggered by events (input, collisions, UI) rather than one fixed sequence.",
+      "mcq": {
+        "options": [
+          "Procedural, Object-Oriented, Functional, Event-Driven",
+          "Functional, Procedural, Object-Oriented, Event-Driven",
+          "Procedural, Event-Driven, Functional, Object-Oriented",
+          "Object-Oriented, Functional, Event-Driven, Procedural"
+        ],
+        "answer": 0,
+        "stem": "A tiny temperature converter, an online banking system, an image-processing pipeline, and a mobile game driven by player input. Which approach best fits each, in that order?"
+      },
+      "tip": "Always justify with the nature of the problem (scale, entities, data transformation, or events), never just 'because it is modern'."
+    },
+    {
+      "id": "w1-08",
+      "topic": "What is OO",
+      "marks": 3,
+      "q": "Define Object-Oriented (OO) as used in this course.",
+      "a": "OO is a software engineering approach to analyse a problem, design a solution, and implement it using software in which the structure is based on objects interacting with each other to accomplish a task.",
+      "mcq": {
+        "options": [
+          "A software engineering approach to analyse a problem, design a solution and implement it using software structured around objects interacting with each other",
+          "A programming language feature that lets one class inherit from another",
+          "A notation for drawing diagrams of database tables and their relationships",
+          "A testing technique that verifies objects in isolation using mocks"
+        ],
+        "answer": 0
+      },
+      "tip": "Three verbs to remember: analyse, design, implement - and 'objects interacting with each other'."
+    },
+    {
+      "id": "w1-09",
+      "topic": "OO development",
+      "marks": 6,
+      "q": "Explain the three phases of Object-Oriented Development.",
+      "a": "1. Analysis - developing conceptual models of solving a software problem. (think about the problem)\n2. Design - realising the analysis with object-oriented system models that could implement the requirements. (present 'potential' ideas that describe the solution)\n3. Programming - realising the object-oriented design by using an object-oriented programming language such as C#, Java or Python. (solve the problem with software)",
+      "mcq": {
+        "options": [
+          "Analysis (conceptual models, thinking about the problem), then Design (OO system models implementing the requirements), then Programming (realising the design in an OO language)",
+          "Design, then Analysis, then Programming",
+          "Programming, then Analysis, then Design",
+          "Analysis, then Programming, then Design"
+        ],
+        "answer": 0,
+        "stem": "Object-Oriented Development has three phases. Which order and description is correct?"
+      },
+      "tip": "Mapping: Analysis = problem, Design = potential solution, Programming = actual software."
+    },
+    {
+      "id": "w1-10",
+      "topic": "Why OO",
+      "marks": 4,
+      "q": "Give four reasons why we use the object-oriented approach.",
+      "a": "1. There are obvious mappings between real-world entities and system objects.\n2. Easier maintenance.\n3. Objects may be understood as stand-alone entities.\n4. Objects are reusable components.",
+      "mcq": {
+        "options": [
+          "Obvious mapping between real-world entities and system objects; easier maintenance; objects are stand-alone entities; objects are reusable components",
+          "Faster execution; smaller binaries; no need for testing; no need for documentation",
+          "It removes all dependencies between components and guarantees thread safety",
+          "It eliminates the need for design and makes code self-documenting"
+        ],
+        "answer": 0
+      },
+      "tip": "The 'real-world mapping' reason is the one markers look for first."
+    },
+    {
+      "id": "w1-11",
+      "topic": "Objects",
+      "marks": 3,
+      "q": "What is an object in the real world? Give two examples of attributes and two examples of behaviours for a customer.",
+      "a": "An object is a thing, an entity - practically anything you can imagine that has its own identity, combining data and behaviour. Examples: a person, employee, account, transaction.\nAll objects have attributes, e.g. a customer has a name, address, gender.\nAll objects have behaviours, e.g. perform transaction, credit money, debit money.",
+      "mcq": {
+        "options": [
+          "It is a thing or entity with its own identity, combining data (attributes) and behaviour",
+          "It is a procedure that operates on data passed in from outside",
+          "It is a database row that stores only data, with no behaviour",
+          "It is a UML-only notation with no code equivalent"
+        ],
+        "answer": 0,
+        "stem": "Which statement about a real-world object is correct?"
+      },
+      "tip": "Key phrase: 'its own identity combining data and behavior'."
+    },
+    {
+      "id": "w1-12",
+      "topic": "Objects in code",
+      "marks": 4,
+      "q": "In code, what are the following referred to as: (a) the name of an object, (b) its attributes, (c) its behaviour, (d) methods that describe how one class works with other classes?",
+      "a": "(a) name -> type\n(b) attributes -> properties\n(c) behaviour -> method\n(d) methods that describe how one class works with other classes -> interfaces",
+      "mcq": {
+        "options": [
+          "type, properties, method, interfaces",
+          "class, fields, function, abstract classes",
+          "variable, operations, event, packages",
+          "type, operations, property, namespaces"
+        ],
+        "answer": 0,
+        "stem": "In code, an object's name is a ___, its attributes are ___, its behaviour is a ___, and methods describing how one class works with others are ___."
+      },
+      "tip": "Pure recall - one mark per term."
+    },
+    {
+      "id": "w1-13",
+      "topic": "Finding objects",
+      "marks": 6,
+      "q": "Scenario: 'A university system allows a Student to enrol in Courses. A Lecturer teaches Courses. Each Course has a code, title and capacity.' Identify the candidate classes, the candidate operations, and the relationships.",
+      "a": "Step 1 - identify nouns: Student, Course, Lecturer, Code, Title, Capacity.\nStep 2 - identify verbs: enrol, teach.\nStep 3 - candidate classes: Student, Course, Lecturer. Code, Title and Capacity are more likely to be attributes of Course.\nPossible design: Student (studentId, name, Enroll()); Course (code, title, capacity, AddStudent()); Lecturer (lecturerId, name, Teach()).\nRelationships: Student --enrols in-- Course; Lecturer --teaches-- Course.",
+      "mcq": {
+        "options": [
+          "Student, Course, Lecturer — Code, Title and Capacity are attributes of Course",
+          "Student, Course, Lecturer, Code, Title, Capacity — all six are classes",
+          "Student, Course, Enrolment, Teaching — Code, Title and Capacity are classes",
+          "University, Student, Course, Lecturer — all four are classes"
+        ],
+        "answer": 0,
+        "stem": "'A university system allows a Student to enrol in Courses. A Lecturer teaches Courses. Each Course has a code, title and capacity.' What are the candidate classes?"
+      },
+      "tip": "Nouns -> candidate classes; verbs -> candidate operations. Not every noun is a class - some are attributes. Always say why."
+    },
+    {
+      "id": "w1-14",
+      "topic": "Is OOP always best",
+      "marks": 3,
+      "q": "Is Object-Oriented Programming always the best approach? Justify your answer.",
+      "a": "No. Good software engineering chooses an appropriate approach. Procedural can be excellent for small, sequential or algorithmic tasks. Functional can be excellent for data transformation and processing. Logic can be excellent for rule-based reasoning. OOD is particularly useful for large systems with entities, relationships, responsibilities and changing state.",
+      "mcq": {
+        "options": [
+          "No — the approach should suit the problem: procedural for small algorithmic tasks, functional for data transformation, logic for rule-based reasoning, OO for large entity-rich systems",
+          "Yes — OOP is always best because it supports reuse and inheritance",
+          "No — procedural programming is always preferable for business systems",
+          "Yes — OOP is mandatory for any system with more than one class"
+        ],
+        "answer": 0
+      },
+      "tip": "Start with a clear 'No', then give one line per alternative approach."
+    },
+    {
+      "id": "w1-15",
+      "topic": "Why OOD",
+      "marks": 4,
+      "q": "Why do we need Object-Oriented Design? Relate your answer to software complexity.",
+      "a": "Large systems contain many entities, rules, states and interactions. Changes in one part can unintentionally affect another part. Developers need clear boundaries and responsibilities. OOD provides ways to structure software so complexity can be managed. Goal: software that is understandable, maintainable and extensible. As a system grows from small to more features to more dependencies, OOP is one strategy for controlling complexity - it encourages assigning clear responsibilities, hiding internal details behind a public interface, and supporting reuse and extension through well-defined relationships.",
+      "mcq": {
+        "options": [
+          "Large systems have many entities, rules, states and interactions; changes in one part can affect another; OOD structures the software so complexity can be managed",
+          "Because procedural code cannot be compiled on modern hardware",
+          "To make programs run faster and use less memory",
+          "Because databases require object models to store data"
+        ],
+        "answer": 0,
+        "stem": "Why do we need Object-Oriented Design? Relate it to software complexity."
+      },
+      "tip": "Use the growth story: small system -> more features -> more dependencies."
+    },
+    {
+      "id": "w1-16",
+      "topic": "OOD thinking",
+      "marks": 3,
+      "q": "Compare the procedural and object-oriented ways of solving the same enrolment problem, and state the real design question.",
+      "a": "Procedural: student_name = \"Ali\"; course_code = \"IT3001\"; enrol(student_name, course_code) - data is held outside and passed into a function that updates shared structures.\nObject-oriented: student = new Student(\"Ali\"); course = new Course(\"IT3001\"); student.enrol(course) - the Student owns the responsibility for requesting enrolment.\nThe syntax is not the main point. The design question is: WHO should be responsible for WHAT?",
+      "mcq": {
+        "options": [
+          "WHO should be responsible for WHAT",
+          "Which syntax is faster at runtime",
+          "Whether to use a class or a struct",
+          "How many parameters a method should take"
+        ],
+        "answer": 0,
+        "stem": "Comparing enrol(student_name, course_code) with student.enrol(course), what is the real design question?"
+      },
+      "tip": "The exam-ready sentence is the last one - 'WHO should be responsible for WHAT?'"
+    }
+  ]
+}

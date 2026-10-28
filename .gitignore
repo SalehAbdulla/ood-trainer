@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*.tmp
+
+# Your personal progress - never commit this.
+# The hosted site keeps progress in your browser instead.
+progress.json
+archive/
+
+# Editors
+.vscode/
+.idea/
+*.swp
