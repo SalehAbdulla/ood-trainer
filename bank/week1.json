@@ -283,6 +283,247 @@
         "stem": "Comparing enrol(student_name, course_code) with student.enrol(course), what is the real design question?"
       },
       "tip": "The exam-ready sentence is the last one - 'WHO should be responsible for WHAT?'"
+    },
+    {
+      "id": "w1-d01",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "__________________ can have member functions with no implementation.",
+      "a": "Abstract Class. An abstract class can declare abstract methods - member functions with no implementation - that its subclasses must implement. Because it is incomplete, an abstract class cannot be instantiated on its own.",
+      "mcq": {
+        "options": [
+          "Abstract Class",
+          "Generic Class",
+          "String class",
+          "Default Class"
+        ],
+        "answer": 0
+      },
+      "tip": "'No implementation' is the definition of an abstract method, so the class that can hold them is the abstract class."
+    },
+    {
+      "id": "w1-d02",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Multiple inheritance is different from multiple levels of inheritance.",
+      "a": "True. Multiple inheritance means one class inherits directly from more than one base class at the same time (C++: class C : public A, public B). Multiple levels of inheritance is a chain - A is the base of B, B is the base of C - and each class still has only one direct base class.",
+      "mcq": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": 0
+      },
+      "tip": "Multiple = several parents at once; multiple levels = a chain of single parents."
+    },
+    {
+      "id": "w1-d03",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Private members of a class can't be inherited.",
+      "a": "True. Private members are not accessible to a derived class, so a subclass cannot inherit (use) them. They are still part of the base-class section of the object and can only be reached through the base class's own public or protected members.",
+      "mcq": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": 0
+      },
+      "tip": "Inherited means usable by the subclass - private members are not."
+    },
+    {
+      "id": "w1-d04",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "_______ relationship is implemented via composition.",
+      "a": "'has a'. Composition is the strong whole-part form of association: one object owns another, so a Car 'has a' Engine and an Order 'has' OrderItems. The 'is a' relationship is implemented by inheritance, not composition.",
+      "mcq": {
+        "options": [
+          "'has a'",
+          "'is a'",
+          "'in a'"
+        ],
+        "answer": 0
+      },
+      "tip": "Composition = whole-part = 'has a'; inheritance = 'is a'."
+    },
+    {
+      "id": "w1-d05",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "When an object of a derived class is instantiated, a base class _______ is called implicitly or explicitly.",
+      "a": "constructor. The base-class constructor always runs before the body of the derived-class constructor, so the base part of the object is built first. If you do not call a specific base constructor yourself (base(...) in C#, super(...) in Java), the default base constructor is called implicitly.",
+      "mcq": {
+        "options": [
+          "constructor",
+          "base",
+          "destructor"
+        ],
+        "answer": 0
+      },
+      "tip": "Construction runs base-first; destruction runs derived-first."
+    },
+    {
+      "id": "w1-d06",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Multiple inheritance could be achieved by",
+      "a": "Interface. A class can implement several interfaces, which gives multiple inheritance of type/contract without the ambiguity of inheriting several implementations. An abstract class is still a single base class, so it cannot be extended more than once.",
+      "mcq": {
+        "options": [
+          "Interface",
+          "Abstract Class"
+        ],
+        "answer": 0
+      },
+      "tip": "One class, many interfaces; one class, one parent class."
+    },
+    {
+      "id": "w1-d07",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Bus and Car classes have _______ relationships with a Vehicle class.",
+      "a": "'is a'. A Bus is a Vehicle and a Car is a Vehicle, so both inherit from Vehicle (generalization). 'part of' would be aggregation/composition, and 'has a' would be composition.",
+      "mcq": {
+        "options": [
+          "'is a'",
+          "'part of'",
+          "'has a'"
+        ],
+        "answer": 0
+      },
+      "tip": "A Bus is a Vehicle, so the relationship is inheritance."
+    },
+    {
+      "id": "w1-d08",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Aggregation and Composition are forms of",
+      "a": "Association that implies the collection of classes that belong to another class - the whole-part relationships, where one class is made up of instances of another. Aggregation is the weak form (the parts have independent lifecycles); composition is the strong form (the parts' lifecycle is tied to the whole).",
+      "mcq": {
+        "options": [
+          "Association that implies the collection of classes that belong to another class",
+          "Association that implies the different types of one class",
+          "Association that implies weak collaborations between classes"
+        ],
+        "answer": 0
+      },
+      "tip": "Aggregation and composition are both whole-part associations."
+    },
+    {
+      "id": "w1-d09",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "In single inheritance, a base class exists in a ______ relationship with its derived classes.",
+      "a": "hierarchical. One base class sits at the top and several derived classes branch from it, so the classes form a hierarchy - which is why an inheritance tree is drawn as a tree.",
+      "mcq": {
+        "options": [
+          "hierarchical",
+          "Stack",
+          "Arbitrary connection"
+        ],
+        "answer": 0
+      },
+      "tip": "One parent, many children = a hierarchy."
+    },
+    {
+      "id": "w1-d10",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Which of the following statements are true:\n1. Overloading is determined at compile time and is static.\n2. Overriding is determined at runtime and is dynamic.\n3. Overloading concerns giving a method with the same name different parameters.\n4. Overriding concerns defining a different implementation of the same method in inherited classes.",
+      "a": "1, 2, 3 and 4 are all true. Overloading = the same method name with different parameter lists, resolved at compile time (static / early binding). Overriding = a subclass supplying its own implementation of a method inherited from its base class, resolved at runtime (dynamic / late binding).",
+      "mcq": {
+        "options": [
+          "1;2;3;4",
+          "1;2 only",
+          "3;4 only",
+          "None of the above"
+        ],
+        "answer": 0,
+        "stem": "Which statements are true? 1. Overloading is compile time/static. 2. Overriding is runtime/dynamic. 3. Overloading = same name, different parameters. 4. Overriding = a different implementation of the same inherited method."
+      },
+      "tip": "Overloading = compile time/static; overriding = runtime/dynamic."
+    },
+    {
+      "id": "w1-d11",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "An object of a derived class cannot access private members of base class.",
+      "a": "True. The derived class cannot read or write the private members of its base class, and neither can code that holds a derived-class object. Only public members (and protected members, from inside the hierarchy) are accessible; the private members are reached only through the base class's own methods.",
+      "mcq": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": 0
+      },
+      "tip": "Private stays private - even to the subclass."
+    },
+    {
+      "id": "w1-d12",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "_________ is an example of Late Binding.",
+      "a": "Method Overriding. Late (dynamic) binding decides at runtime which override to run, based on the actual type of the object the reference points to. Method signatures, method declarations and method overloading are all resolved at compile time - that is early binding.",
+      "mcq": {
+        "options": [
+          "Method Overriding",
+          "Method Signature",
+          "Method Declaration",
+          "Method Overloading"
+        ],
+        "answer": 0
+      },
+      "tip": "Late binding = dynamic dispatch = overriding."
+    },
+    {
+      "id": "w1-d13",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Given the below Class diagram, identify the portion marked with red from the following with the best suited one:",
+      "a": "Inheritance. The portion marked in red is the generalization relationship drawn between a superclass and its subclasses (the hollow triangle pointing at the parent). Polymorphism, encapsulation and abstraction are the other pillars of OO, but they are not what the red relationship denotes.",
+      "mcq": {
+        "options": [
+          "Inheritance",
+          "Polymorphism",
+          "Encapsulation",
+          "Abstraction"
+        ],
+        "answer": 0,
+        "stem": "In the class diagram, the portion marked in red is the relationship drawn between a superclass and its subclasses. Which OO concept does it represent?"
+      },
+      "tip": "The original question refers to a class-diagram image that is not stored in the trainer; the red portion is the superclass-subclass (generalization) relationship."
+    },
+    {
+      "id": "w1-d14",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "A class can implement more than one interface but extend only one class.",
+      "a": "True. Interfaces exist to let a class take on several contracts at once (implements A, B, C), while class inheritance is single: a class can extend only one parent class. This is how Java and C# get the benefits of multiple inheritance without its ambiguity.",
+      "mcq": {
+        "options": [
+          "True",
+          "False"
+        ],
+        "answer": 0
+      },
+      "tip": "Many interfaces, one superclass."
+    },
+    {
+      "id": "w1-d15",
+      "topic": "Diagnostic quiz",
+      "marks": 1,
+      "q": "Polymorphism is considered as a special type of :",
+      "a": "Overriding. Polymorphism works through method overriding: a base-class reference can point to a derived-class object, and the derived override is the one that runs (dynamic binding). Overloading is resolved at compile time and is not the same mechanism.",
+      "mcq": {
+        "options": [
+          "Overriding",
+          "None of them",
+          "Overloading"
+        ],
+        "answer": 0
+      },
+      "tip": "Polymorphic behaviour comes from overriding, not overloading."
     }
   ]
 }

@@ -413,7 +413,7 @@ class Handler(BaseHTTPRequestHandler):
                 ])
 
         if path == "/api/exam/paper":
-            n = _int(qs.get("n", ["20"])[0], 20, 5, 130)
+            n = _int(qs.get("n", ["20"])[0], 20, 5, 145)
             with LOCK:
                 return self._json(exam_paper_payload(srs.load_bank(), n))
 

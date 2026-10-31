@@ -614,7 +614,7 @@ const SRS = (() => {
   // queue. Answering it does NOT touch the spaced-repetition schedule: an exam
   // is a test, not study, and recording it would distort your intervals.
   function examPaper(bk, qs) {
-    const n = clampInt(qs.get('n'), 20, 5, 130);
+    const n = clampInt(qs.get('n'), 20, 5, 145);
     const byWeek = {};
     const marksOf = {};
     for (const qid of Object.keys(bk)) {

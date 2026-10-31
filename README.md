@@ -1,7 +1,7 @@
 # OOD Trainer — spaced-repetition study app
 
 A dark-mode, keyboard-driven revision app for the **IT7006 Object-Oriented
-Design** midterm: 130 questions covering programming approaches, OO concepts,
+Design** midterm: 145 questions covering programming approaches, OO concepts,
 UML class diagrams, use case and sequence diagrams, and design patterns.
 
 **▶ Open it: <https://salehabdulla.github.io/ood-trainer/>**
@@ -35,7 +35,7 @@ always agree. (Waiting and Mastered are the parts of it; neither is the total.)
 
 **A coverage bar sits under it**, showing the whole bank at a glance: green is
 mastered, blue is answered and still in rotation, and the grey remainder is
-untouched — with `8 of 130 answered · 0 mastered` and a percentage alongside.
+untouched — with `8 of 145 answered · 0 mastered` and a percentage alongside.
 
 It is deliberately **not** a mastery bar. Mastery needs four correct recalls per
 question, so a mastery-only bar would sit at 0% while you answered question
@@ -73,9 +73,9 @@ tab.
 
 A timed paper, for rehearsing under pressure. Open the **Exam** tab:
 
-- **Choose a size and a clock** — 10 to 130 questions, 15 to 120 minutes.
+- **Choose a size and a clock** — 10 to 145 questions, 15 to 120 minutes.
 - **The paper is weighted by marks**, not by question count: each week contributes
-  questions in proportion to its share of the bank's 622 marks, so the paper looks like
+  questions in proportion to its share of the bank's 637 marks, so the paper looks like
   the real thing rather than like your due queue.
 - **Nothing is revealed while the clock runs.** No verdict, no model answer, no
   colour — you can change an answer as often as you like until you submit.
@@ -149,7 +149,7 @@ index.html            the app (served by GitHub Pages)
 style.css             dark theme
 app.js                UI: quiz, pager, archive, dashboard
 srs.js                the scheduling engine, in the browser
-bank/week1-5.json     130 questions / 622 marks, each with 4 options,
+bank/week1-5.json     145 questions / 637 marks, each with 4 options,
                       a full model answer and a marks tip
 srs.py                the CLI (same engine, same state format)
 server.py             optional local server for the browser UI
@@ -174,7 +174,7 @@ python3 -m http.server 8000     # then open http://127.0.0.1:8000
   contains only questions, answers and notes written for it — no lecture slides,
   no exercise sheets and no course solutions.
 - **`progress.json` is gitignored.** It is personal. The committed repo starts
-  with a clean slate; the app tracks all 130 questions on first run.
+  with a clean slate; the app tracks all 145 questions on first run.
 
 ## Licence
 
